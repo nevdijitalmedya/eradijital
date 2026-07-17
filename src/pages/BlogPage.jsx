@@ -16,7 +16,7 @@ const MOCK_POSTS = [
     excerpt: "WhatsApp ve Instagram üzerinde 7/24 çalışan yapay zeka entegrasyonlarının satış kapatma oranlarına etkileri ve en iyi senaryolar.",
     publishedAt: "2026-06-25",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-006.jpg"
+    mainImageUrl: "/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp"
   },
   {
     _id: "mock-2",
@@ -25,7 +25,7 @@ const MOCK_POSTS = [
     excerpt: "Sürekli kopyala-yapıştır yaptığınız, randevuları onaylarken zaman kaybettiğiniz ve rapor hazırlamakta zorlandığınız süreçleri nasıl otomatikleştirebilirsiniz?",
     publishedAt: "2026-06-20",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-004.png"
+    mainImageUrl: "/resimler/dijital-donusum-surecimiz/akis-tasarimi.webp"
   },
   {
     _id: "mock-3",
@@ -34,19 +34,18 @@ const MOCK_POSTS = [
     excerpt: "Dijital dönüşüm sadece yazılım satın almak değildir. Doğru bir strateji ile maliyetlerinizi düşürüp operasyonunuzu nasıl büyütebilirsiniz?",
     publishedAt: "2026-06-15",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-003.png"
+    mainImageUrl: "/resimler/hizmetler/dijital-donusum-danismanligi-analiz.webp"
   }
 ];
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState(MOCK_POSTS);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const getPosts = async () => {
       try {
-        // Only fetch from sanity if credentials exist and are not fallback values
         if (import.meta.env.VITE_SANITY_PROJECT_ID && import.meta.env.VITE_SANITY_PROJECT_ID !== 'dummy_id') {
           const query = `*[_type == "post"] | order(publishedAt desc) {
             _id,
@@ -60,15 +59,11 @@ const BlogPage = () => {
           const sanityPosts = await client.fetch(query);
           if (sanityPosts && sanityPosts.length > 0) {
             setPosts(sanityPosts);
-            setLoading(false);
-            return;
           }
         }
       } catch (err) {
-        console.warn("Sanity fetch failed. Using mock data.", err);
+        console.warn("Sanity fetch failed. Using local mock data.", err);
       }
-      setPosts(MOCK_POSTS);
-      setLoading(false);
     };
 
     getPosts();

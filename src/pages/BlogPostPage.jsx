@@ -13,7 +13,7 @@ const MOCK_POSTS_DETAIL = {
     title: "Yapay Zeka Müşteri Temsilcileri ile Satışları Artırma Yolları",
     publishedAt: "2026-06-25",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-006.jpg",
+    mainImageUrl: "/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp",
     excerpt: "WhatsApp ve Instagram üzerinde 7/24 çalışan yapay zeka entegrasyonlarının satış kapatma oranlarına etkileri.",
     contentHtml: `
       <p>Günümüzde tüketiciler her zamankinden daha sabırsız. Yapılan araştırmalara göre, bir mesajlaşma kanalından gelen müşteri talebine ilk 5 dakika içinde yanıt verilmediğinde, satış kapatma ihtimali <strong>%80 oranında düşüyor</strong>. İşte bu noktada yapay zeka destekli müşteri temsilcileri devreye giriyor.</p>
@@ -34,7 +34,7 @@ const MOCK_POSTS_DETAIL = {
     title: "İşletmenizde Otomasyon Yapmanız Gereken 5 Darboğaz Süreç",
     publishedAt: "2026-06-20",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-004.png",
+    mainImageUrl: "/resimler/dijital-donusum-surecimiz/akis-tasarimi.webp",
     excerpt: "Sürekli kopyala-yapıştır yaptığınız, randevuları onaylarken zaman kaybettiğiniz süreçleri nasıl otomatikleştirebilirsiniz?",
     contentHtml: `
       <p>Bir işletmenin büyümesinin önündeki en büyük engeller, tekrarlayan manuel iş yükleridir. Çalışanlarınız zamanlarını rutin işlere harcadıklarında stratejik büyüme adımlarına odaklanamazlar. İşte otomatikleştirebileceğiniz en kritik 5 alan:</p>
@@ -59,7 +59,7 @@ const MOCK_POSTS_DETAIL = {
     title: "Dijital Dönüşüm Nedir ve Nereden Başlanmalıdır?",
     publishedAt: "2026-06-15",
     authorName: "Era Dijital Ekibi",
-    mainImageUrl: "https://eradijital.com/wp-content/uploads/2025/12/ai-003.png",
+    mainImageUrl: "/resimler/hizmetler/dijital-donusum-danismanligi-analiz.webp",
     excerpt: "Maliyetlerinizi düşürüp verimliliğinizi artıracak doğru dijitalleşme stratejileri.",
     contentHtml: `
       <p>Dijital dönüşüm sadece sunucuları buluta taşımak veya yeni bir bilgisayar almak değildir. Dönüşüm, işletmenizin süreçlerini teknoloji yardımıyla kökten değiştirerek verimlilik ve müşteri memnuniyeti yaratma çabasıdır.</p>
@@ -76,8 +76,8 @@ const MOCK_POSTS_DETAIL = {
 
 const BlogPostPage = () => {
   const { slug } = useParams();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState(() => MOCK_POSTS_DETAIL[slug] || null);
+  const [loading, setLoading] = useState(() => !MOCK_POSTS_DETAIL[slug]);
 
   useEffect(() => {
     const getPost = async () => {
@@ -95,19 +95,11 @@ const BlogPostPage = () => {
           if (sanityPost) {
             setPost(sanityPost);
             setLoading(false);
-            return;
           }
         }
       } catch (err) {
-        console.warn("Sanity detail fetch failed. Using mock data.", err);
+        console.warn("Sanity detail fetch failed. Using local mock data.", err);
       }
-
-      // Check mock data
-      const mockPost = MOCK_POSTS_DETAIL[slug];
-      if (mockPost) {
-        setPost(mockPost);
-      }
-      setLoading(false);
     };
 
     getPost();
