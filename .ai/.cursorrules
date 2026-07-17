@@ -1,0 +1,121 @@
+# Era Dijital — Cursor AI Kuralları
+
+## 🎯 Proje Bağlamı
+Bu proje, Era Dijital (eradijital.com) şirketi için Vite + React ile geliştirilmiş bir kurumsal web sitesidir.
+Tam proje bağlamı için `.ai/memory.md` dosyasına bakın.
+
+---
+
+## 📐 Kod Standartları
+
+### Genel
+- Tüm bileşenler **fonksiyonel React bileşeni** olarak yazılır (class component kullanma)
+- Dosya uzantısı: `.jsx`
+- Her sayfa `Header` ve `Footer` bileşenlerini içerir
+- Her sayfa başında `<SEO title="..." description="..." />` bulunur
+- Import sırası: React → Router → Framer Motion → Lucide → Local Components → Local Lib
+
+### Stil
+- **Tailwind CSS** kullanılır — inline style YAZMA
+- Özel CSS sınıfları: `glass`, `glass-card`, `glass-card-hover` (index.css'de tanımlı)
+- Renk paleti: `primary` (indigo), `secondary` (cyan), `accent` (mor), `background`, `surface`
+- Animasyonlar: `framer-motion` kullanılır, keyframe animasyonlar tailwind'de tanımlıdır
+
+### Bileşenler
+- Yeni bileşen → `src/components/` klasörüne ekle
+- Yeni sayfa → `src/pages/` klasörüne ekle ve `App.jsx`'e route ekle
+- CMS verisi → `src/lib/sanity.js` üzerinden `client.fetch()` ile çek
+
+---
+
+## 🚫 Yasaklar
+
+- `styled-components` veya `emotion` KULLANMA
+- `axios` KULLANMA — `fetch` API yeterli
+- Inline `style={{}}` prop YAZMA — Tailwind sınıfı kullan
+- `any` TypeScript tipi KULLANMA (proje JS olsa da yorum satırı olarak belgeleme yap)
+- Gereksiz `useEffect` bağımlılıkları ekleme
+- Yeni npm paketi eklemeden önce mevcut bağımlılıkları kontrol et
+
+---
+
+## ✅ Yapılması Gerekenler
+
+- Tüm görseller `loading="lazy"` ile yüklenir
+- Tüm butonlara erişilebilir `aria-label` ekle
+- Link navigasyonu için `<Link>` (React Router) kullan, `<a href>` değil (iç linkler için)
+- Sayfa geçişlerinde `framer-motion` animasyonu kullan
+- Sanity verisi çekilirken `loading` state göster, hata durumunda mock data'ya düş
+
+---
+
+## 📁 Dosya Yapısı
+
+```
+src/
+├── components/   # Yeniden kullanılabilir bileşenler
+├── pages/        # Route bileşenleri (1 sayfa = 1 dosya)
+├── lib/          # Harici servis istemcileri (sanity.js)
+├── assets/       # Statik dosyalar (logo, icon gibi)
+├── App.jsx       # Route tanımları
+├── main.jsx      # React DOM render
+└── index.css     # Global stiller + Tailwind direktifleri
+```
+
+---
+
+## 🔑 Ortam Değişkenleri
+
+```bash
+VITE_SANITY_PROJECT_ID=838qjxmr
+VITE_SANITY_DATASET=production
+```
+> `.env` dosyasını asla commit etme. `.gitignore`'da olduğunu kontrol et.
+
+---
+
+## 🧩 Sık Kullanılan Kalıplar
+
+### Yeni Sayfa Şablonu
+```jsx
+import SEO from '../components/SEO';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
+
+const YeniSayfa = () => {
+  return (
+    <>
+      <SEO title="Sayfa Başlığı | Era Dijital" description="Açıklama..." />
+      <Header />
+      
+      <section className="relative py-24 overflow-hidden">
+        {/* İçerik */}
+      </section>
+
+      <Footer />
+    </>
+  );
+};
+
+export default YeniSayfa;
+```
+
+### Sanity Veri Çekme Kalıbı
+```jsx
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  client.fetch(`*[_type == "post"]`)
+    .then(result => { setData(result); setLoading(false); })
+    .catch(() => { setData(MOCK_DATA); setLoading(false); });
+}, []);
+```
+
+### Glass Card Bileşeni
+```jsx
+<div className="glass-card glass-card-hover p-8 rounded-3xl">
+  {/* Kart içeriği */}
+</div>
+```
