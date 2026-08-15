@@ -10,6 +10,7 @@ import FiyatlarPage from './pages/FiyatlarPage';
 import ChatBot from './components/ChatBot';
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
+import AdminBlogModal from './components/AdminBlogModal';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       </Routes>
       <ChatBot />
       <WhatsAppButton />
+      <AdminBlogModal />
     </Router>
   );
 }

@@ -99,7 +99,7 @@ const HomePage = () => {
               <div className="relative group max-w-md lg:max-w-full">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-30 blur-[40px] rounded-3xl group-hover:opacity-40 transition-opacity -z-10"></div>
                 <img
-                  src="https://eradijital.com/wp-content/uploads/2025/12/ai-006.jpg"
+                  src="/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp"
                   alt="İstanbul Yapay Zekâ ve Otomasyon Sistemleri Çözümleri - Era Dijital"
                   title="Yapay Zekâ ve Otomasyon Sistemleri İstanbul"
                   className="rounded-3xl border border-white/10 shadow-2xl w-full object-cover aspect-[4/5] max-h-[500px]"

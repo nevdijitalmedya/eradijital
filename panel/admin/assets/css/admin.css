@@ -1,0 +1,277 @@
+/* ═══════════════════════════════════════════════════════════
+   Era Dijital — Premium Admin Panel CSS
+   Dark theme with Era Dijital brand colors
+   ═══════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #6C3AFF;
+    --primary-hover: #5828e0;
+    --accent-color: #a78bfa;
+    --accent-hover: #8b6ff7;
+    --dark-bg: #0c0a14;
+    --card-bg: #161224;
+    --text-color: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border-color: #2a2540;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Glassmorphism Card ── */
+.premium-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(108, 58, 255, 0.15);
+    border-color: var(--primary-color);
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    background-color: #080612;
+    border-right: 1px solid var(--border-color);
+    min-height: 100vh;
+    padding-top: 1.5rem;
+}
+
+.sidebar .nav-link {
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    margin: 0.2rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    color: var(--accent-color);
+    background-color: rgba(108, 58, 255, 0.08);
+}
+
+.sidebar .nav-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-left: 4px solid var(--accent-color);
+    box-shadow: 0 2px 10px rgba(108, 58, 255, 0.3);
+}
+
+/* ── Navbar Header ── */
+.navbar-header {
+    background-color: #080612;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+}
+
+/* ── Premium Buttons ── */
+.btn-premium {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-premium:hover {
+    background: linear-gradient(135deg, var(--accent-hover), var(--primary-color));
+    color: #ffffff;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(108, 58, 255, 0.4);
+}
+
+.btn-premium-outline {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-premium-outline:hover {
+    background-color: rgba(108, 58, 255, 0.1);
+    color: var(--accent-color);
+}
+
+/* ── Form Inputs ── */
+.form-control, .form-select {
+    background-color: #1a1528;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #1a1528;
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.25rem rgba(108, 58, 255, 0.2);
+}
+
+/* ── Tables ── */
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+    --bs-table-bg: var(--card-bg);
+    --bs-table-color: var(--text-color);
+    --bs-table-border-color: var(--border-color);
+    --bs-table-hover-bg: rgba(108, 58, 255, 0.06);
+    --bs-table-hover-color: var(--text-color);
+}
+
+.table th {
+    background-color: #120e1f !important;
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.table td {
+    vertical-align: middle;
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: rgba(108, 58, 255, 0.06) !important;
+}
+
+.table td .fw-bold.text-white,
+.table td span.fw-bold.text-white {
+    color: #ffffff !important;
+}
+
+.table td .text-muted,
+.table td.text-muted {
+    color: #9ca3af !important;
+}
+
+/* ── Form Check (Dark) ── */
+.form-check-input {
+    background-color: #2a2540;
+    border-color: #4a4265;
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* ── Login ── */
+.login-container {
+    max-width: 420px;
+    margin: 8% auto;
+    padding: 2.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(108, 58, 255, 0.15);
+}
+
+/* ── Typography Overrides ── */
+.text-muted {
+    color: #a0aec0 !important;
+}
+
+label, .form-label {
+    color: #e5e7eb !important;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* ── Nav Tabs (Dark) ── */
+.nav-tabs {
+    border-bottom: 1px solid var(--border-color);
+}
+.nav-tabs .nav-link {
+    color: #a0aec0 !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s ease;
+}
+.nav-tabs .nav-link:hover {
+    color: var(--accent-color) !important;
+}
+.nav-tabs .nav-link.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)) !important;
+    border-color: var(--border-color) var(--border-color) transparent !important;
+}
+
+/* ── Stat Cards (Dashboard) ── */
+.stat-card {
+    background: linear-gradient(135deg, var(--card-bg), rgba(108, 58, 255, 0.05));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(108, 58, 255, 0.15);
+}
+
+.stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Badge Styles ── */
+.badge-published {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-draft {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* ── Alerts ── */
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.alert-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+/* ── Dropdown (Dark) ── */
+.dropdown-menu-dark {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}

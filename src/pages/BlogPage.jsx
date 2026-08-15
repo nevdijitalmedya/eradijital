@@ -3,75 +3,53 @@ import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Calendar, User, ArrowRight, BookOpen } from 'lucide-react';
-import { client, urlFor } from '../lib/sanity';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-// Mock data to ensure the blog works out-of-the-box before Sanity setup
-const MOCK_POSTS = [
-  {
-    _id: "mock-1",
-    title: "Yapay Zeka Müşteri Temsilcileri ile Satışları Artırma Yolları",
-    slug: { current: "yapay-zeka-musteri-temsilcileri-satis-artirma" },
-    excerpt: "WhatsApp ve Instagram üzerinde 7/24 çalışan yapay zeka entegrasyonlarının satış kapatma oranlarına etkileri ve en iyi senaryolar.",
-    publishedAt: "2026-06-25",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp"
-  },
-  {
-    _id: "mock-2",
-    title: "İşletmenizde Otomasyon Yapmanız Gereken 5 Darboğaz Süreç",
-    slug: { current: "isletmelerde-otomasyon-yapilmasi-gereken-darbogazlar" },
-    excerpt: "Sürekli kopyala-yapıştır yaptığınız, randevuları onaylarken zaman kaybettiğiniz ve rapor hazırlamakta zorlandığınız süreçleri nasıl otomatikleştirebilirsiniz?",
-    publishedAt: "2026-06-20",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/dijital-donusum-surecimiz/akis-tasarimi.webp"
-  },
-  {
-    _id: "mock-3",
-    title: "Dijital Dönüşüm Nedir ve Nereden Başlanmalıdır?",
-    slug: { current: "dijital-donusum-nedir-nereden-baslanmali" },
-    excerpt: "Dijital dönüşüm sadece yazılım satın almak değildir. Doğru bir strateji ile maliyetlerinizi düşürüp operasyonunuzu nasıl büyütebilirsiniz?",
-    publishedAt: "2026-06-15",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/hizmetler/dijital-donusum-danismanligi-analiz.webp"
-  }
-];
+import { getBlogPosts } from '../data/blogPosts';
+
+const API_URL = import.meta.env.VITE_PANEL_API_URL || '';
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState(MOCK_POSTS);
+  const [posts, setPosts] = useState(() => getBlogPosts());
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const getPosts = async () => {
+    // 1. Dinamik Event Listener (AdminModal üzerinden anlık güncelleme)
+    const handleLocalUpdate = (e) => {
+      if (e.detail) {
+        setPosts(e.detail);
+      } else {
+        setPosts(getBlogPosts());
+      }
+    };
+    window.addEventListener('era_blog_updated', handleLocalUpdate);
+
+    // 2. Eğer harici API tanımlıysa API'den de senkronize et
+    const fetchApiPosts = async () => {
+      if (!API_URL) return;
       try {
-        if (import.meta.env.VITE_SANITY_PROJECT_ID && import.meta.env.VITE_SANITY_PROJECT_ID !== 'dummy_id') {
-          const query = `*[_type == "post"] | order(publishedAt desc) {
-            _id,
-            title,
-            slug,
-            excerpt,
-            publishedAt,
-            "authorName": author->name,
-            mainImage
-          }`;
-          const sanityPosts = await client.fetch(query);
-          if (sanityPosts && sanityPosts.length > 0) {
-            setPosts(sanityPosts);
+        const res = await fetch(`${API_URL}/blog.php`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setPosts(data);
           }
         }
       } catch (err) {
-        console.warn("Sanity fetch failed. Using local mock data.", err);
+        // API çalışmıyorsa sessizce yerel verileri koru
       }
     };
 
-    getPosts();
+    fetchApiPosts();
+
+    return () => window.removeEventListener('era_blog_updated', handleLocalUpdate);
   }, []);
 
   const filteredPosts = posts.filter(post =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+    (post.excerpt && post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -127,8 +105,8 @@ const BlogPage = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post) => {
-              const imageSrc = post.mainImage ? urlFor(post.mainImage).url() : post.mainImageUrl;
-              const dateStr = new Date(post.publishedAt).toLocaleDateString('tr-TR', {
+              const imageSrc = post.featured_image || '/resimler/placeholder.webp';
+              const dateStr = new Date(post.published_at).toLocaleDateString('tr-TR', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -136,7 +114,7 @@ const BlogPage = () => {
 
               return (
                 <motion.article
-                  key={post._id}
+                  key={post.id}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
@@ -164,12 +142,12 @@ const BlogPage = () => {
                         </div>
                         <div className="flex items-center space-x-1">
                           <User className="w-4 h-4" />
-                          <span>{post.authorName || 'Era Dijital'}</span>
+                          <span>{post.author_name || 'Era Dijital'}</span>
                         </div>
                       </div>
 
                       <h3 className="text-lg font-bold text-white leading-snug hover:text-primary transition-colors">
-                        <Link to={`/blog/${post.slug.current}`}>{post.title}</Link>
+                        <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                       </h3>
 
                       <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
@@ -180,7 +158,7 @@ const BlogPage = () => {
 
                   <div className="p-6 pt-0">
                     <Link
-                      to={`/blog/${post.slug.current}`}
+                      to={`/blog/${post.slug}`}
                       className="inline-flex items-center text-xs font-bold text-primary hover:text-secondary group transition-colors"
                     >
                       <span>Devamını Oku</span>

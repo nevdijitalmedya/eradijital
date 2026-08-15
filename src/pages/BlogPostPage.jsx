@@ -1,108 +1,45 @@
 import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { useParams, Link } from 'react-router-dom';
-import { PortableText } from '@portabletext/react';
-import { Calendar, User, ArrowLeft, Clock } from 'lucide-react';
-import { client, urlFor } from '../lib/sanity';
+import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-// Mock post detailed content
-const MOCK_POSTS_DETAIL = {
-  "yapay-zeka-musteri-temsilcileri-satis-artirma": {
-    title: "Yapay Zeka Müşteri Temsilcileri ile Satışları Artırma Yolları",
-    publishedAt: "2026-06-25",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp",
-    excerpt: "WhatsApp ve Instagram üzerinde 7/24 çalışan yapay zeka entegrasyonlarının satış kapatma oranlarına etkileri.",
-    contentHtml: `
-      <p>Günümüzde tüketiciler her zamankinden daha sabırsız. Yapılan araştırmalara göre, bir mesajlaşma kanalından gelen müşteri talebine ilk 5 dakika içinde yanıt verilmediğinde, satış kapatma ihtimali <strong>%80 oranında düşüyor</strong>. İşte bu noktada yapay zeka destekli müşteri temsilcileri devreye giriyor.</p>
-      
-      <h3>1. 7/24 Kesintisiz Yanıt Hızı</h3>
-      <p>Müşterileriniz genellikle akşam saatlerinde, hafta sonları veya tatillerde sosyal medyada gezinirken size ulaşır. Ekibiniz mesai dışındayken gelen mesajlara yapay zeka saniyeler içinde doğal bir dille yanıt vererek randevu oluşturabilir veya sipariş talebi toplayabilir.</p>
+import { getBlogPostBySlug } from '../data/blogPosts';
 
-      <h3>2. Doğal ve Kişiselleştirilmiş İletişim</h3>
-      <p>Eski nesil 'seçenek seçiniz' mantığındaki botlar yerine, güncel geniş dil modelleri (LLM) ile beslenen yapay zeka ajanları, müşterinin yazdığı serbest metinleri mükemmel şekilde anlar. İşletmenizin kurallarına göre müşteriye özel indirimler sunabilir, stok bilgisini sorgulayabilir.</p>
-
-      <h3>3. CRM ve Satış Kanalları Entegrasyonu</h3>
-      <p>Yapay zeka temsilcileri konuşma esnasında müşterinin isim, telefon, e-posta gibi bilgilerini toplayıp doğrudan CRM veri tabanınıza (Hubspot, Salesforce, yerel sistemler vb.) kaydeder. Böylece satış ekibiniz mesaiye başladığında hazır ve ısınmış lead'lerle karşılaşır.</p>
-
-      <p>İşletmenizi yapay zeka entegrasyonlarıyla güçlendirmek ve satış kaçırmayı durdurmak için bizimle iletişime geçip ücretsiz ön analiz alabilirsiniz.</p>
-    `
-  },
-  "isletmelerde-otomasyon-yapilmasi-gereken-darbogazlar": {
-    title: "İşletmenizde Otomasyon Yapmanız Gereken 5 Darboğaz Süreç",
-    publishedAt: "2026-06-20",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/dijital-donusum-surecimiz/akis-tasarimi.webp",
-    excerpt: "Sürekli kopyala-yapıştır yaptığınız, randevuları onaylarken zaman kaybettiğiniz süreçleri nasıl otomatikleştirebilirsiniz?",
-    contentHtml: `
-      <p>Bir işletmenin büyümesinin önündeki en büyük engeller, tekrarlayan manuel iş yükleridir. Çalışanlarınız zamanlarını rutin işlere harcadıklarında stratejik büyüme adımlarına odaklanamazlar. İşte otomatikleştirebileceğiniz en kritik 5 alan:</p>
-      
-      <h3>1. WhatsApp & Instagram DM Cevaplama</h3>
-      <p>Aynı sorulara ('Fiyat nedir?', 'Adresiniz neresi?', 'Çalışma saatleriniz nedir?') yüzlerce kez el ile cevap yazmak yerine, bu akışı yapay zekaya devredebilirsiniz.</p>
-
-      <h3>2. Randevu & Rezervasyon Takibi</h3>
-      <p>Güzellik merkezleri, klinikler veya danışmanlık firmalarında randevu almak, saat teyit etmek ve hatırlatma mesajları göndermek tamamen otonom akışlarla (örneğin Google Calendar veya Cal.com entegrasyonları ile) çözülebilir.</p>
-
-      <h3>3. Lead (Müşteri Adayı) Toplama ve CRM Kaydı</h3>
-      <p>Web sitenizden, sosyal medyalardan gelen form verilerinin tek tek elle CRM sistemine girilmesi zaman kaybıdır. Otomatik entegrasyonlarla veriler milisaniyeler içinde senkronize edilir.</p>
-
-      <h3>4. Fatura ve Teklif Süreçleri</h3>
-      <p>Onaylanan siparişlerin muhasebe sistemine aktarılması ve faturaların kesilmesi otomatik tetikleyicilerle insansız yürütülebilir.</p>
-
-      <h3>5. Düzenli Haftalık/Aylık Raporlama</h3>
-      <p>Satış veya reklam verilerini Excel tablolarında birleştirmek yerine, n8n veya Make gibi otomasyon araçlarıyla otomatik paneller (dashboard) hazırlayabilirsiniz.</p>
-    `
-  },
-  "dijital-donusum-nedir-nereden-baslanmali": {
-    title: "Dijital Dönüşüm Nedir ve Nereden Başlanmalıdır?",
-    publishedAt: "2026-06-15",
-    authorName: "Era Dijital Ekibi",
-    mainImageUrl: "/resimler/hizmetler/dijital-donusum-danismanligi-analiz.webp",
-    excerpt: "Maliyetlerinizi düşürüp verimliliğinizi artıracak doğru dijitalleşme stratejileri.",
-    contentHtml: `
-      <p>Dijital dönüşüm sadece sunucuları buluta taşımak veya yeni bir bilgisayar almak değildir. Dönüşüm, işletmenizin süreçlerini teknoloji yardımıyla kökten değiştirerek verimlilik ve müşteri memnuniyeti yaratma çabasıdır.</p>
-      
-      <h3>Nereden Başlanmalı?</h3>
-      <p><strong>1. Kültür ve Farkındalık:</strong> Ekibinizin yeni teknolojileri benimsemesi en kritik adımdır. Otomasyonun onların işini ellerinden alacağını değil, onları angarya işlerden kurtaracağını anlatmalısınız.</p>
-      <p><strong>2. Süreç Analizi:</strong> En çok zaman alan ve hata yapılan 3 süreci listeleyin. Dönüşüme buralardan başlamak en hızlı verimi almanızı sağlar.</p>
-      <p><strong>3. Doğru Araç Seçimi:</strong> Büyük bütçeli, karmaşık yazılımlar yerine ihtiyaçlarınızı tam karşılayan esnek ve entegre edilebilir API dostu sistemleri tercih edin.</p>
-
-      <p>Era Dijital olarak dönüşüm sürecinizde size yol göstermek ve en verimli AI altyapısını kurmak için yanınızdayız.</p>
-    `
-  }
-};
+const API_URL = import.meta.env.VITE_PANEL_API_URL || '';
 
 const BlogPostPage = () => {
   const { slug } = useParams();
-  const [post, setPost] = useState(() => MOCK_POSTS_DETAIL[slug] || null);
-  const [loading, setLoading] = useState(() => !MOCK_POSTS_DETAIL[slug]);
+  const [post, setPost] = useState(() => getBlogPostBySlug(slug));
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getPost = async () => {
+    // 1. Dinamik Event Listener (AdminModal üzerinden güncellendiğinde yenile)
+    const handleLocalUpdate = () => {
+      setPost(getBlogPostBySlug(slug));
+    };
+    window.addEventListener('era_blog_updated', handleLocalUpdate);
+
+    // 2. Harici API varsa API'den de sorgula
+    const fetchApiPost = async () => {
+      if (!API_URL) return;
       try {
-        if (import.meta.env.VITE_SANITY_PROJECT_ID && import.meta.env.VITE_SANITY_PROJECT_ID !== 'dummy_id') {
-          const query = `*[_type == "post" && slug.current == $slug][0] {
-            title,
-            publishedAt,
-            "authorName": author->name,
-            mainImage,
-            excerpt,
-            body
-          }`;
-          const sanityPost = await client.fetch(query, { slug });
-          if (sanityPost) {
-            setPost(sanityPost);
-            setLoading(false);
+        const res = await fetch(`${API_URL}/blog.php?slug=${encodeURIComponent(slug)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && !data.status && data.title) {
+            setPost(data);
           }
         }
       } catch (err) {
-        console.warn("Sanity detail fetch failed. Using local mock data.", err);
+        // API çalışmıyorsa sessizce yerel verileri koru
       }
     };
 
-    getPost();
+    fetchApiPost();
+
+    return () => window.removeEventListener('era_blog_updated', handleLocalUpdate);
   }, [slug]);
 
   if (loading) {
@@ -134,8 +71,8 @@ const BlogPostPage = () => {
     );
   }
 
-  const imageSrc = post.mainImage ? urlFor(post.mainImage).url() : post.mainImageUrl;
-  const dateStr = new Date(post.publishedAt).toLocaleDateString('tr-TR', {
+  const imageSrc = post.featured_image || '/resimler/placeholder.webp';
+  const dateStr = new Date(post.published_at).toLocaleDateString('tr-TR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -144,8 +81,8 @@ const BlogPostPage = () => {
   return (
     <>
       <SEO
-        title={`${post.title} | Era Dijital Blog`}
-        description={post.excerpt}
+        title={`${post.seo_title || post.title} | Era Dijital Blog`}
+        description={post.seo_description || post.excerpt}
       />
 
       <Header />
@@ -170,7 +107,7 @@ const BlogPostPage = () => {
             </div>
             <div className="flex items-center space-x-2">
               <User className="w-4.5 h-4.5 text-primary" />
-              <span>{post.authorName || 'Era Dijital'}</span>
+              <span>{post.author_name || 'Era Dijital'}</span>
             </div>
           </div>
         </div>
@@ -184,14 +121,11 @@ const BlogPostPage = () => {
           />
         </div>
 
-        {/* Post Content */}
-        <div className="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-6 text-base sm:text-lg">
-          {post.body ? (
-            <PortableText value={post.body} />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
-          )}
-        </div>
+        {/* Post Content (HTML from WYSIWYG editor) */}
+        <div 
+          className="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-6 text-base sm:text-lg"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </article>
 
       <Footer />

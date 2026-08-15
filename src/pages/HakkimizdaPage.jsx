@@ -99,9 +99,9 @@ const HakkimizdaPage = () => {
             <div className="relative flex justify-center">
               <div className="absolute inset-0 bg-primary/15 blur-[40px] rounded-3xl -z-10"></div>
               <img 
-                src="https://eradijital.com/wp-content/uploads/2025/12/AI-Illustrations_06.png" 
+                src="/resimler/dijital-donusum-surecimiz/ai-kurulumu.webp" 
                 alt="Era Dijital İllüstrasyon" 
-                className="max-h-[400px] w-auto object-contain animate-float"
+                className="max-h-[400px] w-auto object-contain animate-float rounded-2xl"
               />
             </div>
           </div>
