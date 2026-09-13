@@ -102,8 +102,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                <a href="mailto:info@eradijital.com" className="hover:text-ink transition-colors">
-                  info@eradijital.com
+                <a href="mailto:eradijitalinfo@gmail.com" className="hover:text-ink transition-colors">
+                  eradijitalinfo@gmail.com
                 </a>
               </li>
             </ul>

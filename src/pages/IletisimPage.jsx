@@ -98,8 +98,8 @@ export default function IletisimPage() {
                     <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <div className="space-y-1 text-xs sm:text-sm">
                       <span className="font-mono text-[11px] text-ink-faint uppercase block">E-Posta</span>
-                      <a href="mailto:info@eradijital.com" className="text-slate-200 hover:text-primary transition-colors font-mono">
-                        info@eradijital.com
+                      <a href="mailto:eradijitalinfo@gmail.com" className="text-slate-200 hover:text-primary transition-colors font-mono">
+                        eradijitalinfo@gmail.com
                       </a>
                     </div>
                   </div>
