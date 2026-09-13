@@ -1,27 +1,24 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-
 import { getBlogPostBySlug } from '../data/blogPosts';
 
 const API_URL = import.meta.env.VITE_PANEL_API_URL || '';
 
-const BlogPostPage = () => {
+export default function BlogPostPage() {
   const { slug } = useParams();
   const [post, setPost] = useState(() => getBlogPostBySlug(slug));
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   useEffect(() => {
-    // 1. Dinamik Event Listener (AdminModal üzerinden güncellendiğinde yenile)
     const handleLocalUpdate = () => {
       setPost(getBlogPostBySlug(slug));
     };
     window.addEventListener('era_blog_updated', handleLocalUpdate);
 
-    // 2. Harici API varsa API'den de sorgula
     const fetchApiPost = async () => {
       if (!API_URL) return;
       try {
@@ -33,7 +30,7 @@ const BlogPostPage = () => {
           }
         }
       } catch (err) {
-        // API çalışmıyorsa sessizce yerel verileri koru
+        // Fallback
       }
     };
 
@@ -44,10 +41,10 @@ const BlogPostPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col justify-between">
+      <div className="min-h-screen flex flex-col justify-between bg-background text-ink">
         <Header />
         <div className="flex justify-center items-center py-40">
-          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
         </div>
         <Footer />
       </div>
@@ -56,15 +53,18 @@ const BlogPostPage = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex flex-col justify-between">
+      <div className="min-h-screen flex flex-col justify-between bg-background text-ink">
         <Header />
-        <div className="max-w-xl mx-auto text-center py-40 space-y-6">
-          <h2 className="text-2xl font-bold text-white">Yazı Bulunamadı</h2>
-          <p className="text-slate-400">Aradığınız makale mevcut değil veya kaldırılmış olabilir.</p>
-          <Link to="/blog" className="inline-flex items-center text-primary font-bold hover:text-white transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Bloga geri dön
-          </Link>
+        <div className="max-w-xl mx-auto text-center py-40 space-y-4 px-4">
+          <span className="mono-tag">[404 // BULUNAMADI]</span>
+          <h2 className="text-2xl font-bold text-ink">Yazı Bulunamadı</h2>
+          <p className="text-sm text-ink-muted">Aradığınız makale mevcut değil veya yayından kaldırılmış olabilir.</p>
+          <div className="pt-2">
+            <Link to="/blog" className="btn-secondary text-xs">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Tüm Makalelere Dön</span>
+            </Link>
+          </div>
         </div>
         <Footer />
       </div>
@@ -79,7 +79,7 @@ const BlogPostPage = () => {
   });
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-background text-ink selection:bg-primary selection:text-white">
       <SEO
         title={`${post.seo_title || post.title} | Era Dijital Blog`}
         description={post.seo_description || post.excerpt}
@@ -87,50 +87,69 @@ const BlogPostPage = () => {
 
       <Header />
 
-      <article className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        {/* Back Link */}
-        <Link to="/blog" className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Tüm Yazılar
-        </Link>
+      <main className="flex-1 py-12">
+        <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          {/* Back Nav */}
+          <Link to="/blog" className="inline-flex items-center gap-1.5 font-mono text-xs text-ink-muted hover:text-ink transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>[GERİ // BLOG DİZİNİ]</span>
+          </Link>
 
-        {/* Post Header */}
-        <div className="space-y-6">
-          <h1 className="text-3xl sm:text-5xl font-black text-white leading-tight">
-            {post.title}
-          </h1>
+          {/* Article Header */}
+          <div className="space-y-4">
+            <h1 className="text-2xl sm:text-4xl font-bold text-ink tracking-tight leading-tight">
+              {post.title}
+            </h1>
 
-          <div className="flex items-center space-x-6 text-sm text-slate-400 font-medium">
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4.5 h-4.5 text-primary" />
-              <span>{dateStr}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <User className="w-4.5 h-4.5 text-primary" />
-              <span>{post.author_name || 'Era Dijital'}</span>
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-ink-faint border-y border-border py-2.5">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-primary" />
+                <span>{dateStr}</span>
+              </div>
+              <span>•</span>
+              <div className="flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-primary" />
+                <span>{post.author_name || 'Era Dijital Teknik Ekip'}</span>
+              </div>
+              {post.category && (
+                <>
+                  <span>•</span>
+                  <span className="mono-tag text-[10px]">{post.category}</span>
+                </>
+              )}
             </div>
           </div>
-        </div>
 
-        {/* Thumbnail */}
-        <div className="aspect-video relative overflow-hidden bg-slate-900 border border-white/5 rounded-3xl">
-          <img
-            src={imageSrc}
-            alt={post.title}
-            className="w-full h-full object-cover"
+          {/* Hero Thumbnail */}
+          {imageSrc && (
+            <div className="tech-panel overflow-hidden bg-[#0d111a] border border-border">
+              <img
+                src={imageSrc}
+                alt={post.title}
+                className="w-full h-auto max-h-[440px] object-cover"
+              />
+            </div>
+          )}
+
+          {/* Body Content */}
+          <div 
+            className="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-4 text-sm sm:text-base pt-4"
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
-        </div>
 
-        {/* Post Content (HTML from WYSIWYG editor) */}
-        <div 
-          className="prose prose-invert max-w-none text-slate-300 leading-relaxed space-y-6 text-base sm:text-lg"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
-      </article>
+          {/* Article Footer */}
+          <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-xs text-ink-muted">
+              Yapay zekâ otomasyonu hakkında daha fazla bilgi almak için ön analiz toplantısı talep edebilirsiniz.
+            </div>
+            <Link to="/on-analiz" className="btn-primary text-xs shrink-0">
+              Ücretsiz Ön Analiz Al
+            </Link>
+          </div>
+        </article>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default BlogPostPage;
+}

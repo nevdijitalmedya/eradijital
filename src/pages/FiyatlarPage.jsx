@@ -1,55 +1,52 @@
+﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { 
-  Check, 
-  HelpCircle, 
-  Cpu, 
-  Globe, 
-  TrendingUp, 
-  ArrowRight, 
-  Sparkles, 
-  DollarSign
-} from 'lucide-react';
+import { Check, Cpu, ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const FiyatlarPage = () => {
+export default function FiyatlarPage() {
+  const [activeTab, setActiveTab] = useState('asistan');
+
   const asistanCozumleri = [
     {
       title: "Sosyal Medya Platformları",
+      code: "AI-PKG-01",
       setup: "18.000 TL",
-      monthly: "6.000 TL",
+      monthly: "6.000 TL / Ay",
       extra: "Her ekstra platform +6.000 TL",
-      desc: "WhatsApp, Instagram veya Telegram gibi sosyal kanallarda 7/24 aktif akıllı asistan.",
+      desc: "WhatsApp, Instagram veya Telegram kanallarında 7/24 aktif akıllı müşteri temsilcisi.",
       features: [
-        "Temel soru-cevap ve bilgi bankası",
-        "Sosyal medya entegrasyonu (DM/Yorum)",
-        "Hazır şablon yanıt akışları",
-        "Aylık chatbot performans izleme raporu"
+        "Temel soru-cevap ve şirket bilgi bankası",
+        "Sosyal medya entegrasyonu (DM & Yorumlar)",
+        "Hazır şablon yanıt ve ön eleme akışları",
+        "Aylık chatbot performans ve etkileşim raporu"
       ]
     },
     {
       title: "Web Sitesi Asistanı",
+      code: "AI-PKG-02",
       setup: "18.000 TL",
-      monthly: "6.000 TL",
-      desc: "Web sitenize özel, ziyaretçilerinizi karşılayan ve lead toplayan akıllı asistan.",
+      monthly: "6.000 TL / Ay",
+      desc: "Web sitenize özel, gelen ziyaretçileri karşılayan ve iletişim bilgilerini toplayan akıllı widget.",
       features: [
         "Web sitesi canlı sohbet entegrasyonu",
-        "Müşteri bilgisi toplama ve mail bildirimi",
+        "Müşteri bilgisi toplama ve anlık e-posta / SMS bildirimi",
         "Hizmet ve ürün tanıtım modülleri",
-        "Kullanıcı dostu arayüz özelleştirmesi"
+        "Kullanıcı dostu arayüz ve marka renk uyarlaması"
       ]
     },
     {
       title: "Web + Tüm Sosyal Medya",
+      code: "AI-PKG-03 // ÖNERİLEN",
       setup: "60.000 TL",
-      monthly: "18.000 TL",
-      desc: "Tüm dijital kanallarınızı birbirine bağlayan ve tek merkezden yönetilen hibrit AI asistan çözümü.",
+      monthly: "18.000 TL / Ay",
+      desc: "Tüm dijital kanallarınızı birbirine bağlayan ve tek merkezden yönetilen hibrit AI altyapısı.",
       features: [
-        "Çoklu kanal (Omnichannel) entegrasyonu",
-        "Ortak bilgi bankası paylaşımı",
-        "Gelişmiş konuşma yönlendirme kuralları",
-        "Öncelikli teknik destek ve SLA garantisi"
+        "Çoklu kanal (Omnichannel WhatsApp + IG + Web) entegrasyonu",
+        "Merkezi ortak bilgi bankası (RAG) paylaşımı",
+        "Gelişmiş konuşma ve temsilciye yönlendirme kuralları",
+        "Öncelikli teknik destek ve 1.5s yanıt SLA garantisi"
       ],
       popular: true
     }
@@ -59,411 +56,375 @@ const FiyatlarPage = () => {
     {
       title: "Landing Page",
       price: "12.000 TL",
-      desc: "Yüksek dönüşüm oranı hedefleyen özel açılış (landing) sayfaları.",
+      desc: "Yüksek dönüşüm oranı hedefleyen tek sayfalık özel açılış sayfası.",
       features: [
-        "Tek sayfalık modern & mobil uyumlu tasarım",
-        "Hızlı yükleme ve SEO optimizasyonu",
-        "İletişim formları ve WhatsApp butonları",
-        "Analiz kodları kurulumu (Google Analytics, Pixel)"
+        "Tek sayfalık modern ve mobil uyumlu tasarım",
+        "Hızlı yükleme ve teknik SEO optimizasyonu",
+        "İletişim formları ve doğrudan WhatsApp butonları",
+        "Google Analytics ve Meta Pixel entegrasyonu"
       ]
     },
     {
       title: "AI Mini Paket",
       price: "24.000 TL",
-      desc: "Esnaflar ve butik çalışmalar için yapay zeka destekli web sitesi çözümü.",
+      desc: "Esnaflar ve butik işletmeler için yapay zekâ destekli kurumsal site.",
       features: [
         "3-5 Sayfaya kadar kurumsal tasarım",
-        "AI destekli içerik taslakları",
-        "Mobil & Tablet uyumlu altyapı",
+        "Yapay zekâ destekli içerik ve metin hazırlığı",
+        "Mobil ve tablet uyumlu altyapı",
         "Temel yönetim paneli (Admin Panel)"
       ]
     },
     {
-      title: "AI Kobi Paket",
+      title: "AI KOBİ Paket",
       price: "72.000 TL",
-      desc: "KOBİ'ler için modern ve standart web sitesi çözümleri.",
+      desc: "KOBİ'ler için ölçeklenebilir ve kurumsal web sitesi çözümleri.",
       features: [
-        "Sınırsız sayfa ekleme ve gelişmiş panel",
-        "AI destekli blog ve sayfa içerik üretici",
-        "Çoklu dil altyapısı (Opsiyonel)",
-        "Gelişmiş SEO ve hız optimizasyonu",
-        "Yıllık ücretsiz hosting ve domain desteği"
+        "Sınırsız sayfa ekleme ve gelişmiş yönetim paneli",
+        "Yapay zekâ destekli blog ve içerik üretici modülü",
+        "Çoklu dil altyapısı desteği",
+        "Gelişmiş teknik SEO ve hız optimizasyonu",
+        "1 yıllık ücretsiz hosting ve SSL sertifikası"
       ]
     },
     {
       title: "AI Eko Paket",
       price: "144.000 TL",
-      desc: "KOBİ'ler için müşteri deneyimi ve otomasyon odaklı kapsamlı çözüm.",
+      desc: "Müşteri deneyimi ve otomasyon odaklı kapsamlı kurumsal platform.",
       features: [
-        "Özel tasarım ve dinamik içerik yapıları",
-        "E-ticaret veya rezervasyon altyapısı entegrasyonu",
-        "Yapay zeka asistan temel entegrasyonu",
-        "Müşteri paneli ve CRM entegrasyon modülleri",
+        "Özel UI/UX tasarım ve dinamik içerik yapısı",
+        "E-ticaret veya randevu / rezervasyon entegrasyonu",
+        "Temel yapay zekâ asistan entegrasyonu",
+        "Müşteri paneli ve CRM entegrasyon köprüleri",
         "Haftalık performans ve trafik raporlamaları"
       ]
     },
     {
       title: "AI Pro Paket",
       price: "288.000 TL",
-      desc: "KOBİ'ler için müşteri ilişkileri otomasyon odaklı premium çözüm.",
+      popular: true,
+      desc: "Uçtan uca otomasyon ve özel yazılım altyapısı gerektiren işletmeler için.",
       features: [
-        "Uçtan uca özel yazılım ve arayüz tasarımı",
-        "Gelişmiş AI otomasyon sistemleri entegrasyonu",
-        "WhatsApp / Instagram AI Ajanı entegrasyonu",
-        "Tam otomatik CRM ve ERP veri aktarımı",
-        "Özel SLA desteği ve danışmanlık hizmeti"
-      ],
-      popular: true
+        "Uçtan uca özel yazılım ve mimari tasarım",
+        "Gelişmiş AI otomasyon sistemleri ve webhook köprüsü",
+        "WhatsApp ve Instagram AI Ajanı tam entegrasyonu",
+        "Tam otomatik CRM ve ERP çift yönlü veri aktarımı",
+        "Özel SLA desteği ve sürekli danışmanlık hizmeti"
+      ]
     }
   ];
 
   const dijitalPazarlama = [
     {
-      title: "SEO - GEO",
-      price: "18.000 TL / Aylık",
-      desc: "Mevcut site içi arama motoru ve coğrafi arama optimizasyonu ile yüksek organik görünürlük.",
+      title: "SEO - GEO Optimizasyonu",
+      price: "18.000 TL / Ay",
+      desc: "Site içi arama motoru ve bölgesel harita aramalarında yüksek organik görünürlük.",
       features: [
-        "Ayrıntılı anahtar kelime ve rakip analizi",
-        "Site içi teknik SEO optimizasyonu",
-        "Google Haritalar ve lokal optimizasyon",
-        "Aylık gelişim ve sıralama raporları"
+        "Ayrıntılı anahtar kelime ve rakip açığı analizi",
+        "Site içi teknik SEO ve Core Web Vitals optimizasyonu",
+        "Google İşletme Profili ve haritalar optimizasyonu",
+        "Aylık sıralama ve organik trafik raporu"
       ]
     },
     {
-      title: "Sosyal Medya İçerik",
-      price: "24.000 TL / Aylık",
-      desc: "Markaya özel stratejik içerik yönetimi.",
+      title: "Sosyal Medya İçerik Yönetimi",
+      price: "24.000 TL / Ay",
+      desc: "Markaya özel stratejik ve yapay zekâ destekli içerik üretimi.",
       features: [
-        "Haftalık 1 adet masaüstü AI film (15 sn)",
-        "Haftalık 2 adet profesyonel post tasarımı",
-        "Özel açıklama (caption) ve hashtag çalışmaları",
-        "Sosyal medya hesap yönetimi ve planlama"
+        "Haftalık 1 adet masaüstü AI tanıtım kurgusu",
+        "Haftalık 2 adet profesyonel post / carousel tasarımı",
+        "Özel açıklama (caption) ve hashtag stratejisi",
+        "Sosyal medya hesap yönetimi ve zamanlama"
       ]
     },
     {
-      title: "Sosyal Medya Reklam",
-      price: "24.000 TL / Aylık",
-      desc: "Hedef kitleye yönelik profesyonel reklam kampanyası yönetimi.",
+      title: "Sosyal Medya Reklam Yönetimi",
+      price: "24.000 TL / Ay",
+      desc: "Hedef kitleye yönelik profesyonel reklam ve ROAS optimizasyonu.",
       features: [
-        "Meta (Instagram/Facebook) & Google reklam kurulumu",
-        "A/B testleri ve hedef kitle optimizasyonları",
-        "AI otomasyon akışları ile reklam entegrasyonu",
-        "Detaylı ROI ve dönüşüm analiz raporları"
+        "Meta (Instagram & Facebook) ve Google reklam kurgusu",
+        "A/B testleri ve dinamik hedef kitle segmentasyonu",
+        "AI otomasyon karşılama akışları ile reklam entegrasyonu",
+        "Ayrıntılı ROAS, CAC ve dönüşüm analiz raporları"
       ]
     }
   ];
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-background text-ink selection:bg-primary selection:text-white">
       <SEO
-        title="Hizmet Paketleri ve Fiyatlandırma | Era Dijital"
-        description="Yapay zeka otomasyonları, web tasarım, SEO ve sosyal medya reklam hizmetlerimizin güncel paket ve fiyat detayları."
+        title="Paketler & Fiyatlandırma | Era Dijital"
+        description="Yapay zekâ otomasyonları, web dönüşüm paketleri, SEO ve sosyal medya reklam hizmetlerimizin şeffaf ve güncel fiyat detayları."
       />
 
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden border-b border-white/5">
-        <div className="absolute top-1/4 left-1/2 w-96 h-96 bg-primary/10 blur-[150px] rounded-full pointer-events-none -z-10 -translate-x-1/2"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-semibold tracking-wider uppercase">
-            <DollarSign className="w-4 h-4" />
-            <span>Şeffaf Fiyatlandırma</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-black text-white">
-            Hizmet Paketleri & Fiyatlandırma
-          </h1>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            İşletmenizin ölçeğine ve ihtiyaçlarına en uygun yapay zeka, web ve dijital pazarlama çözümlerimizi inceleyin.
-          </p>
-        </div>
-      </section>
-
-      {/* 1. Dijital Asistan & Otomasyon */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
-          <div className="space-y-4 max-w-2xl">
-            <div className="flex items-center space-x-2.5 text-primary">
-              <Cpu className="w-6 h-6" />
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">1. Dijital Asistan & Otomasyon Çözümleri</h2>
+      <main className="flex-1">
+        {/* Header Hero */}
+        <section className="py-16 hairline-b bg-surface/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl space-y-4">
+              <span className="mono-tag">[ŞEFFAF MİMARİ VE FİYATLANDIRMA]</span>
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-ink">
+                Hizmet Paketleri ve Yatırım Tablosu
+              </h1>
+              <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
+                Gizli maliyetler yok. İşletmenizin büyüklüğüne ve iletişim hacmine en uygun otomasyon ve geliştirme paketlerini inceleyin.
+              </p>
             </div>
-            <p className="text-slate-400 text-sm">
-              Müşteri etkileşimini otomatize eden 7/24 aktif akıllı asistan kurulum ve yönetim çözümleri.
-            </p>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {asistanCozumleri.map((pkg, idx) => (
-            <div 
-              key={idx} 
-              className={`glass-card rounded-3xl p-8 flex flex-col justify-between relative border ${
-                pkg.popular ? 'border-primary/45 shadow-lg shadow-primary/5' : 'border-white/5'
-              }`}
-            >
-              {pkg.popular && (
-                <div className="absolute -top-3.5 left-8 px-4 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold shadow-md">
-                  En Çok Tercih Edilen
-                </div>
-              )}
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{pkg.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{pkg.desc}</p>
-                </div>
-
-                <div className="py-6 border-y border-white/5 space-y-2">
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-3xl font-black text-white">{pkg.setup}</span>
-                    <span className="text-xs text-slate-400">/ Kurulum</span>
-                  </div>
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-xl font-bold text-secondary">{pkg.monthly}</span>
-                    <span className="text-xs text-slate-400">/ Aylık Yönetim</span>
-                  </div>
-                  {pkg.extra && <span className="text-[11px] text-accent block font-medium mt-1">{pkg.extra}</span>}
-                </div>
-
-                <ul className="space-y-3.5">
-                  {pkg.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-start space-x-3 text-slate-300 text-xs">
-                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-8">
-                <Link
-                  to="/on-analiz"
-                  className={`block w-full py-3.5 text-center text-xs font-bold rounded-xl transition-all ${
-                    pkg.popular
-                      ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:shadow-primary/30'
-                      : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
-                  }`}
-                >
-                  Ön Analiz Alarak Başla
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* AI Yazılım & Otomasyon Çözümleri Notu */}
-        <div className="mt-8 p-6 rounded-2xl border border-white/5 bg-surface/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-3xl">
-            <h4 className="text-sm font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-primary" />
-              AI Yazılım & Otomasyon Çözümleri
-            </h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              İşletmenize özel yapay zeka tabanlı yazılım ve iş süreçleri otomasyon çözümleri. Fiyatlandırma proje kapsamına ve ihtiyacınıza göre belirlenmektedir.
-            </p>
-          </div>
-          <Link
-            to="/iletisim"
-            className="shrink-0 inline-flex items-center text-xs font-bold text-primary hover:text-secondary group transition-colors"
-          >
-            <span>Detaylı Bilgi Al</span>
-            <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </section>
-
-      {/* 2. Web Sitesi & Dönüşüm Çözümleri */}
-      <section className="py-24 bg-surface/30 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-4 max-w-2xl mb-12">
-            <div className="flex items-center space-x-2.5 text-secondary">
-              <Globe className="w-6 h-6" />
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">2. Web Sitesi & Dönüşüm Çözümleri</h2>
-            </div>
-            <p className="text-slate-400 text-sm">
-              İşletme ölçeğinize uygun, yapay zeka destekli, modern ve yüksek dönüşüm hedefli altyapılar.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {webDinusumPaketleri.map((pkg, idx) => (
-              <div 
-                key={idx} 
-                className={`glass-card rounded-3xl p-8 flex flex-col justify-between relative border ${
-                  pkg.popular ? 'border-primary/45 shadow-lg shadow-primary/5' : 'border-white/5'
+            {/* Category Filter Tabs */}
+            <div className="mt-8 flex flex-wrap gap-2">
+              <button
+                onClick={() => setActiveTab('asistan')}
+                className={`font-mono text-xs px-4 py-2 rounded transition-colors ${
+                  activeTab === 'asistan'
+                    ? 'bg-primary text-white font-semibold'
+                    : 'bg-surface border border-border text-ink-muted hover:text-ink'
                 }`}
               >
-                {pkg.popular && (
-                  <div className="absolute -top-3.5 left-8 px-4 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold shadow-md">
-                    Önerilen Premium Çözüm
-                  </div>
-                )}
+                01 // AI ASİSTAN VE OTOMASYON
+              </button>
+              <button
+                onClick={() => setActiveTab('web')}
+                className={`font-mono text-xs px-4 py-2 rounded transition-colors ${
+                  activeTab === 'web'
+                    ? 'bg-primary text-white font-semibold'
+                    : 'bg-surface border border-border text-ink-muted hover:text-ink'
+                }`}
+              >
+                02 // WEB DÖNÜŞÜM PAKETLERİ
+              </button>
+              <button
+                onClick={() => setActiveTab('pazarlama')}
+                className={`font-mono text-xs px-4 py-2 rounded transition-colors ${
+                  activeTab === 'pazarlama'
+                    ? 'bg-primary text-white font-semibold'
+                    : 'bg-surface border border-border text-ink-muted hover:text-ink'
+                }`}
+              >
+                03 // DİJİTAL PAZARLAMA VE BÜYÜME
+              </button>
+            </div>
+          </div>
+        </section>
 
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">{pkg.title}</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">{pkg.desc}</p>
-                  </div>
-
-                  <div className="py-6 border-y border-white/5 flex items-baseline space-x-2">
-                    <span className="text-3xl font-black text-white">{pkg.price}</span>
-                    <span className="text-xs text-slate-400">/ Başlangıç</span>
-                  </div>
-
-                  <ul className="space-y-3.5">
-                    {pkg.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start space-x-3 text-slate-300 text-xs">
-                        <Check className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="pt-8">
-                  <Link
-                    to="/on-analiz"
-                    className={`block w-full py-3.5 text-center text-xs font-bold rounded-xl transition-all ${
-                      pkg.popular
-                        ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-lg hover:shadow-primary/30'
-                        : 'bg-white/5 hover:bg-white/10 text-white border border-white/10'
-                    }`}
-                  >
-                    Hemen Başvur
-                  </Link>
-                </div>
+        {/* SECTION 1: AI ASİSTAN VE OTOMASYON */}
+        {(activeTab === 'asistan' || activeTab === 'all') && (
+          <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div>
+                <span className="font-mono text-xs text-primary font-semibold">[KATALOG 01]</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-ink">Dijital Asistan & Otomasyon Çözümleri</h2>
               </div>
-            ))}
-
-            {/* Business Yazılım Çözümleri Kartı (Pro Paket Altında) */}
-            <div className="glass-card rounded-3xl p-8 flex flex-col justify-between border border-accent/40 bg-accent/5 relative">
-              <div className="absolute -top-3.5 left-8 px-4 py-1 rounded-full bg-accent text-white text-xs font-bold shadow-md">
-                Kurumsal Özel Çözüm
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">Business Yazılım Çözümleri</h3>
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    İşletmenizin özel iş süreçleri, veri tabanları ve ihtiyaçlarına yönelik uçtan uca yazılım çözümleri.
-                  </p>
-                </div>
-
-                <div className="py-6 border-y border-white/5">
-                  <span className="text-xl font-extrabold text-accent">Fiyat almak için lütfen danışın</span>
-                </div>
-
-                <ul className="space-y-3.5">
-                  <li className="flex items-start space-x-3 text-slate-300 text-xs">
-                    <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <span>Tamamen firmanıza özel mimari ve kodlama</span>
-                  </li>
-                  <li className="flex items-start space-x-3 text-slate-300 text-xs">
-                    <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <span>Mevcut kurumsal sistemler ile tam API entegrasyonu</span>
-                  </li>
-                  <li className="flex items-start space-x-3 text-slate-300 text-xs">
-                    <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <span>Şirket içi özel AI modelleri ve bilgi tabanları</span>
-                  </li>
-                  <li className="flex items-start space-x-3 text-slate-300 text-xs">
-                    <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <span>Kapsamlı test, kurulum ve bakım süreçleri</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-8">
-                <Link
-                  to="/iletisim"
-                  className="block w-full py-3.5 text-center text-xs font-bold rounded-xl bg-accent text-white shadow-lg hover:shadow-accent/30 transition-all"
-                >
-                  Fiyat Teklifi Al / Danışın
-                </Link>
-              </div>
+              <span className="font-mono text-xs text-ink-faint hidden sm:inline-block">
+                Tüm paketlerde bilgi bankası eğitimi dahildir.
+              </span>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Görünürlük & Dijital Pazarlama */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-4 max-w-2xl mb-12">
-          <div className="flex items-center space-x-2.5 text-accent">
-            <TrendingUp className="w-6 h-6" />
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">3. Görünürlük & Dijital Pazarlama Yönetimi</h2>
-          </div>
-          <p className="text-slate-400 text-sm">
-            Markanızın dijital görünürlüğünü artıran ve performansı en üst seviyeye çıkaran stratejik pazarlama yönetimi.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {dijitalPazarlama.map((pkg, idx) => (
-            <div key={idx} className="glass-card rounded-3xl p-8 flex flex-col justify-between border border-white/5">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{pkg.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{pkg.desc}</p>
-                </div>
-
-                <div className="py-6 border-y border-white/5 flex items-baseline space-x-2">
-                  <span className="text-3xl font-black text-white">{pkg.price}</span>
-                </div>
-
-                <ul className="space-y-3.5">
-                  {pkg.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-start space-x-3 text-slate-300 text-xs">
-                      <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-8">
-                <Link
-                  to="/on-analiz"
-                  className="block w-full py-3.5 text-center text-xs font-bold rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all"
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {asistanCozumleri.map((pkg, idx) => (
+                <div 
+                  key={idx}
+                  className={`tech-panel p-6 flex flex-col justify-between space-y-6 relative ${
+                    pkg.popular ? 'border-primary/50 bg-[#0c1220]' : ''
+                  }`}
                 >
-                  Detaylı Analiz İstiyorum
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs text-primary font-semibold">
+                        {pkg.code}
+                      </span>
+                      {pkg.popular && (
+                        <span className="mono-tag mono-tag-active text-[10px]">ÖNERİLEN ÇÖZÜM</span>
+                      )}
+                    </div>
 
-      {/* Informative / FAQ Banner */}
-      <section className="py-16 bg-surface/20 border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/5 space-y-6">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-primary" />
-              Önemli Bilgilendirmeler
-            </h3>
-            <ul className="space-y-4 text-xs text-slate-400 leading-relaxed">
-              <li className="flex items-start space-x-2.5">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full shrink-0 mt-1.5"></span>
-                <span>Yukarıda listelenen fiyatlar <strong>minimum başlangıç</strong> fiyatlarıdır. Projenin kapsamına, teknik detaylarına ve spesifik iş yüküne göre yukarı yönlü revizyonlar yapılabilir.</span>
-              </li>
-              <li className="flex items-start space-x-2.5">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full shrink-0 mt-1.5"></span>
-                <span>İhtiyaçlarınıza yönelik birden fazla paket veya modül satın alınması durumunda, sözleşme şartlarına bağlı olarak markanıza özel <strong>promosyonlar veya iskonto</strong> imkanları sağlanmaktadır.</span>
-              </li>
-              <li className="flex items-start space-x-2.5">
-                <span className="w-1.5 h-1.5 bg-primary rounded-full shrink-0 mt-1.5"></span>
-                <span>Tüm fiyatlarımıza KDV dahil değildir. Ödeme vadeleri ve planları sözleşme esnasında tarafların mutabakatı ile belirlenir.</span>
-              </li>
-            </ul>
+                    <h3 className="text-lg font-bold text-ink">{pkg.title}</h3>
+                    <p className="text-xs text-ink-muted leading-relaxed">{pkg.desc}</p>
+
+                    <div className="pt-3 border-t border-border/70 space-y-1">
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-2xl font-bold text-ink">{pkg.setup}</span>
+                        <span className="font-mono text-xs text-ink-faint">Kurulum</span>
+                      </div>
+                      <div className="font-mono text-xs text-slate-300">
+                        + {pkg.monthly} bakım & model kotası
+                      </div>
+                      {pkg.extra && (
+                        <div className="font-mono text-[11px] text-ink-faint">({pkg.extra})</div>
+                      )}
+                    </div>
+
+                    <div className="pt-3 border-t border-border/70">
+                      <span className="font-mono text-[11px] text-ink-faint uppercase block mb-2.5">
+                        [PAKET KAPSAMI]
+                      </span>
+                      <ul className="space-y-2 text-xs text-slate-200">
+                        {pkg.features.map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-signal-emerald shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/70">
+                    <Link to="/on-analiz" className={pkg.popular ? "btn-primary w-full text-xs justify-center" : "btn-secondary w-full text-xs justify-center"}>
+                      <span>Bu Paketi Seç ve Başla</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* SECTION 2: WEB DÖNÜŞÜM PAKETLERİ */}
+        {(activeTab === 'web' || activeTab === 'all') && (
+          <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div>
+                <span className="font-mono text-xs text-primary font-semibold">[KATALOG 02]</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-ink">Web Geliştirme & Dönüşüm Paketleri</h2>
+              </div>
+              <span className="font-mono text-xs text-ink-faint hidden sm:inline-block">
+                Modern mimari, sıfır kod yükü, yüksek hız puanı.
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {webDinusumPaketleri.map((pkg, idx) => (
+                <div 
+                  key={idx}
+                  className={`tech-panel p-6 flex flex-col justify-between space-y-6 ${
+                    pkg.popular ? 'border-primary/50 bg-[#0c1220]' : ''
+                  }`}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs text-primary font-semibold">
+                        [WEB-{idx + 1}]
+                      </span>
+                      {pkg.popular && (
+                        <span className="mono-tag mono-tag-active text-[10px]">TAM DONANIM</span>
+                      )}
+                    </div>
+
+                    <h3 className="text-lg font-bold text-ink">{pkg.title}</h3>
+                    <p className="text-xs text-ink-muted leading-relaxed">{pkg.desc}</p>
+
+                    <div className="pt-3 border-t border-border/70">
+                      <span className="font-mono text-2xl font-bold text-ink">{pkg.price}</span>
+                      <span className="font-mono text-xs text-ink-faint block mt-0.5">Tek Seferlik Kurulum</span>
+                    </div>
+
+                    <div className="pt-3 border-t border-border/70">
+                      <span className="font-mono text-[11px] text-ink-faint uppercase block mb-2.5">
+                        [ÖZELLİKLER]
+                      </span>
+                      <ul className="space-y-2 text-xs text-slate-200">
+                        {pkg.features.map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-signal-emerald shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/70">
+                    <Link to="/on-analiz" className={pkg.popular ? "btn-primary w-full text-xs justify-center" : "btn-secondary w-full text-xs justify-center"}>
+                      <span>Teklif Al</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* SECTION 3: DİJİTAL PAZARLAMA VE BÜYÜME */}
+        {(activeTab === 'pazarlama' || activeTab === 'all') && (
+          <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div>
+                <span className="font-mono text-xs text-primary font-semibold">[KATALOG 03]</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-ink">Dijital Pazarlama & Büyüme Paketleri</h2>
+              </div>
+              <span className="font-mono text-xs text-ink-faint hidden sm:inline-block">
+                Yapay zekâ otomasyonlarıyla entegre çalışan reklam ve SEO yönetimi.
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {dijitalPazarlama.map((pkg, idx) => (
+                <div key={idx} className="tech-panel p-6 flex flex-col justify-between space-y-6">
+                  <div className="space-y-4">
+                    <span className="font-mono text-xs text-primary font-semibold">
+                      [GROWTH-{idx + 1}]
+                    </span>
+                    <h3 className="text-lg font-bold text-ink">{pkg.title}</h3>
+                    <p className="text-xs text-ink-muted leading-relaxed">{pkg.desc}</p>
+
+                    <div className="pt-3 border-t border-border/70">
+                      <span className="font-mono text-2xl font-bold text-ink">{pkg.price}</span>
+                      <span className="font-mono text-xs text-ink-faint block mt-0.5">Düzenli Yönetim</span>
+                    </div>
+
+                    <div className="pt-3 border-t border-border/70">
+                      <span className="font-mono text-[11px] text-ink-faint uppercase block mb-2.5">
+                        [KAPSAM]
+                      </span>
+                      <ul className="space-y-2 text-xs text-slate-200">
+                        {pkg.features.map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-start gap-2">
+                            <Check className="w-3.5 h-3.5 text-signal-emerald shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border/70">
+                    <Link to="/on-analiz" className="btn-secondary w-full text-xs justify-center">
+                      <span>Bilgi Al</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* BOTTOM FAQ CALLOUT */}
+        <section className="py-20 hairline-t bg-surface/20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span className="mono-tag">[ÖZEL İHTİYAÇLAR]</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+              Standart paketlerin dışında özel bir entegrasyona mı ihtiyacınız var?
+            </h2>
+            <p className="text-sm text-ink-muted max-w-xl mx-auto">
+              Şirket içi ERP, SAP veya özel veri tabanlarınıza bağlanacak hibrit çözümler için özel mimari hazırlayabiliriz.
+            </p>
+            <div className="pt-2 flex justify-center">
+              <Link to="/iletisim" className="btn-primary">
+                <span>Teknik Ekibimizle Görüşün</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default FiyatlarPage;
+}

@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -7,36 +7,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#030712", // Derin gece mavisi/siyah
-        surface: "#0b0f19",    // Kart yüzey rengi
+        background: "#0a0d14",      // Hallmark Precision Dark Ground (never pure #000)
+        surface: {
+          DEFAULT: "#111622",      // Primary surface
+          elevated: "#171e2e",     // Elevated card / module
+          hover: "#1c2436",        // Hover state
+        },
         primary: {
-          DEFAULT: "#6366f1", // Indigo
-          hover: "#4f46e5",
+          DEFAULT: "#2563eb",      // Electric Cobalt signal
+          hover: "#1d4ed8",
+          active: "#1e40af",
+          subtle: "rgba(37, 99, 235, 0.12)",
         },
-        secondary: {
-          DEFAULT: "#06b6d4", // Cyan
-          hover: "#0891b2",
+        signal: {
+          blue: "#3b82f6",
+          emerald: "#10b981",      // Operational status
+          amber: "#f59e0b",
         },
-        accent: {
-          DEFAULT: "#a855f7", // Mor
-          hover: "#9333ea",
+        ink: {
+          DEFAULT: "#f1f5f9",      // Primary text
+          muted: "#94a3b8",        // Secondary body text
+          faint: "#64748b",        // Tertiary labels / metadata
         },
-        muted: "#94a3b8",      // Soluk metin gri
-        border: "#1f2937",     // Koyu gri kenarlık
+        border: {
+          DEFAULT: "rgba(255, 255, 255, 0.08)",  // Hairline rule
+          strong: "rgba(255, 255, 255, 0.16)",
+          cobalt: "rgba(37, 99, 235, 0.4)",
+        },
       },
       fontFamily: {
-        sans: ["Outfit", "Inter", "sans-serif"],
+        display: ["'Space Grotesk'", "sans-serif"],
+        sans: ["'Inter'", "sans-serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
       },
-      animation: {
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "float": "float 6s ease-in-out infinite",
+      borderRadius: {
+        sm: "4px",
+        DEFAULT: "6px",
+        md: "8px",
+        lg: "10px",
+        xl: "14px",
       },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        }
-      }
+      boxShadow: {
+        hairline: "inset 0 0 0 1px rgba(255, 255, 255, 0.08)",
+        card: "0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4)",
+        elevated: "0 8px 24px -4px rgba(0, 0, 0, 0.6)",
+      },
     },
   },
   plugins: [],

@@ -1,155 +1,180 @@
-import { motion } from 'framer-motion';
-import SEO from '../components/SEO';
+﻿import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Users, Target, CheckCircle2, ArrowRight } from 'lucide-react';
+import { 
+  Target, 
+  ShieldCheck, 
+  CheckCircle2, 
+  ArrowRight, 
+  Users, 
+  Zap, 
+  Workflow, 
+  Layers 
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const HakkimizdaPage = () => {
+export default function HakkimizdaPage() {
   const benefits = [
-    { title: "Müşteri İletişim Hızını Artırır", desc: "WhatsApp ve Instagram'da yanıt süreleri 10 saniyenin altına düşer, müşteriler anında yanıt alır." },
-    { title: "Operasyon Maliyetini Düşürür", desc: "Büyüyen mesaj trafiğinize ek müşteri temsilcisi istihdam etmek yerine otomasyonla tasarruf sağlarsınız." },
-    { title: "Ekibi Stratejik İşlere Yönlendirir", desc: "Temsilcileriniz tekrar eden kopyala-yapıştır sorulardan kurtulur, doğrudan satış odaklı işlere yönelir." },
-    { title: "Pazarlama Performansını Yükseltir", desc: "Reklamlardan gelen trafik anında karşılandığı için dönüşüm oranları ve ROI belirgin şekilde artar." },
-    { title: "Manuel İş Yükünü %60-%90 Azaltır", desc: "Tüm sık sorulan sorular, randevu akışları ve ön kayıtlar insan müdahalesi olmadan tamamlanır." },
+    { 
+      index: "01",
+      title: "Müşteri Yanıt Hızını İvmelendirir", 
+      desc: "WhatsApp ve Instagram üzerinde ilk yanıt süresini 1.5 saniyenin altına indirerek potansiyel müşterilerin dikkatini sıcak tutar." 
+    },
+    { 
+      index: "02",
+      title: "Operasyonel Sabit Maliyeti Düşürür", 
+      desc: "Büyüyen mesaj hacmine karşılık sürekli ek personel istihdam etmek yerine, tekrarlı soruları otonom altyapıya devreder." 
+    },
+    { 
+      index: "03",
+      title: "Ekibi Stratejik Görevlere Yönlendirir", 
+      desc: "Müşteri temsilcileriniz gün boyu kopyala-yapıştır adres veya fiyat yazmak yerine doğrudan satış kapatmaya odaklanır." 
+    },
+    { 
+      index: "04",
+      title: "Reklam Dönüşüm Oranını (ROAS) Katlar", 
+      desc: "Reklamlardan gelen trafik anında karşılandığı ve lead bilgileri kaybolmadan CRM'e işlendiği için reklam bütçesi maksimum getiri sağlar." 
+    },
+    { 
+      index: "05",
+      title: "Manuel Hataları Sıfırlar", 
+      desc: "Eksik bilgi kaydı, unutulan randevu veya gözden kaçan mesaj gibi insani hataları standart webhook kurgularıyla ortadan kaldırır." 
+    },
+  ];
+
+  const targetSectors = [
+    "E-Ticaret & D2C Markaları",
+    "Özel Klinikler & Sağlık Merkezleri",
+    "Güzellik & Estetik Merkezleri",
+    "Teknik Servis & Saha Operasyonları",
+    "B2B Hizmet & Danışmanlık Firmaları",
+    "Yoğun Mesaj Kuyruğu Olan Çağrı Merkezleri"
   ];
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-background text-ink selection:bg-primary selection:text-white">
       <SEO
-        title="Hakkımızda | Era Dijital"
-        description="Era Dijital, uzun yıllara dayanan dijital pazarlama tecrübesi ile yapay zekâ teknolojisini birleştirerek işletmelere özel AI operasyon sistemleri kurar."
+        title="Hakkımızda & Yaklaşımımız | Era Dijital"
+        description="Era Dijital, dijital medya tecrübesini kurumsal yapay zekâ altyapısıyla birleştirerek işletmelere özel otonom operasyon sistemleri kurar."
       />
 
       <Header />
 
-      {/* Intro Hero */}
-      <section className="relative py-24 overflow-hidden border-b border-white/5">
-        <div className="absolute top-10 left-1/2 w-96 h-96 bg-primary/10 blur-[150px] rounded-full pointer-events-none -z-10 -translate-x-1/2"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-6xl font-extrabold text-white"
-          >
-            Yapay Zekâ ile Geleceği Tasarlıyoruz
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Era Dijital olarak uzun yıllara dayanan dijital medya ve pazarlama tecrübemizi; bugün iş dünyasının en büyük devrimi olan <strong>Yapay Zekâ (AI)</strong> ile birleştiriyoruz.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Vision & Mission */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/5 space-y-6">
-          <div className="p-3.5 bg-primary/10 text-primary rounded-2xl w-fit">
-            <Target className="w-6 h-6" />
-          </div>
-          <h3 className="text-2xl font-bold text-white">Vizyonumuz</h3>
-          <p className="text-slate-400 leading-relaxed text-sm">
-            Türkiye'de ve globalde, yapay zekâ tabanlı operasyon sistemleri denildiğinde akla gelen ilk dönüşüm partneri olmak. Daha akıllı, daha hızlı ve daha verimli işletmelerin geleceğini tasarlamak.
-          </p>
-        </div>
-
-        <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/5 space-y-6">
-          <div className="p-3.5 bg-secondary/10 text-secondary rounded-2xl w-fit">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
-          <h3 className="text-2xl font-bold text-white">Misyonumuz</h3>
-          <p className="text-slate-400 leading-relaxed text-sm">
-            İşletmelerin tekrarlayan, manuel ve yorucu süreçlerini yapay zeka entegrasyonlarıyla otomatik hale getirmek. İnsan kaynağını daha stratejik, yaratıcı ve yüksek katma değerli alanlara kaydırmalarını sağlamak.
-          </p>
-        </div>
-      </section>
-
-      {/* Target Audience Sektörler */}
-      <section className="py-24 bg-surface/30 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Kiminle Çalışıyoruz?</h2>
-              <p className="text-slate-400 leading-relaxed">
-                Yoğun mesaj trafiği olan, operasyon yükü artan ve müşteri iletişimini hızlandırmak isteyen tüm işletmeler ile çalışıyoruz.
+      <main className="flex-1">
+        {/* Intro Section */}
+        <section className="py-16 sm:py-20 hairline-b bg-surface/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl space-y-4">
+              <span className="mono-tag">[BİZ KİMİZ // ERA DİJİTAL]</span>
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-ink">
+                Yapay Zekâ ile Operasyonel Geleceği İnşa Ediyoruz
+              </h1>
+              <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
+                Era Dijital olarak uzun yıllara dayanan dijital medya, performans pazarlaması ve yazılım tecrübemizi; günümüzün en büyük dönüşümü olan yapay zekâ ve otonom iş akışlarıyla birleştiriyoruz.
               </p>
-              <p className="text-sm font-semibold text-slate-300">En çok fayda sağladığımız sektörler:</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  "E-ticaret Firmaları",
-                  "Güzellik Merkezleri",
-                  "Özel Klinikler",
-                  "Teknik Servisler",
-                  "Hizmet Odaklı Markalar",
-                  "Çağrı Merkezi Yükü Yüksek İşletmeler"
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3 text-slate-300">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                    <span className="text-sm font-medium">{item}</span>
-                  </div>
-                ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Mission & Vision Blueprint */}
+        <section className="py-16 hairline-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="tech-panel p-8 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-primary font-semibold">[01 // VİZYON]</span>
+                <Target className="w-5 h-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-ink">Ölçülebilir & Hızlı Sistemler</h3>
+              <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                Türkiye'de ve bölgede kurumsal yapay zekâ otomasyonları denildiğinde güvenilirlik, hız ve yüksek entegrasyon kabiliyetiyle ilk akla gelen teknoloji partneri olmak. Boşa giden mesaileri değil, büyüyen işletmeleri tasarlıyoruz.
+              </p>
+            </div>
+
+            <div className="tech-panel p-8 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-signal-emerald font-semibold">[02 // MİSYON]</span>
+                <ShieldCheck className="w-5 h-5 text-signal-emerald" />
+              </div>
+              <h3 className="text-xl font-bold text-ink">İnsanı Tekrarlı Yükten Özgürleştirmek</h3>
+              <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                İşletmelerin her gün aynı soruları cevaplayarak veya manuel veri kopyalayarak harcadığı yüzlerce saati otonom altyapıya devretmek. İnsan aklını stratejiye, yaratıcılığa ve değer üretmeye odaklamak.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Who We Serve / Target Sectors */}
+        <section className="py-16 hairline-b bg-surface/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <span className="mono-tag mb-3">[SEKTÖREL MİMARİ]</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                    Kiminle ve Hangi Sektörlerle Çalışıyoruz?
+                  </h2>
+                </div>
+                <p className="text-sm text-ink-muted leading-relaxed">
+                  Günde onlarca veya yüzlerce müşteri mesajı alan, randevu takvimini yönetmekte zorlanan ya da reklam bütçesinin geri dönüşünü artırmak isteyen tüm ölçeklerdeki işletmelerle çalışıyoruz.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {targetSectors.map((sector, sIdx) => (
+                    <div key={sIdx} className="p-3 tech-panel flex items-center gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-signal-emerald shrink-0" />
+                      <span className="text-xs sm:text-sm font-medium text-slate-200">{sector}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 flex justify-center">
+                <figure className="tech-panel p-2 bg-[#0c1018] border border-border max-w-sm w-full">
+                  <img 
+                    src="/resimler/dijital-donusum-surecimiz/ai-kurulumu.webp" 
+                    alt="Era Dijital Kurulum ve Entegrasyon Aşamaları" 
+                    className="w-full h-auto object-contain rounded"
+                  />
+                  <figcaption className="mt-2 text-[11px] font-mono text-center text-ink-faint">
+                    Kurulum & Doğrulama Mimarisi
+                  </figcaption>
+                </figure>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="relative flex justify-center">
-              <div className="absolute inset-0 bg-primary/15 blur-[40px] rounded-3xl -z-10"></div>
-              <img 
-                src="/resimler/dijital-donusum-surecimiz/ai-kurulumu.webp" 
-                alt="Era Dijital İllüstrasyon" 
-                className="max-h-[400px] w-auto object-contain animate-float rounded-2xl"
-              />
+        {/* Benefits List */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mb-12">
+              <span className="mono-tag mb-3">[OPERASYONEL KAZANIMLAR]</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                İşletmenizi Güçlendiren 5 Temel Çıktı
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {benefits.map((b) => (
+                <div key={b.index} className="tech-panel p-6 space-y-3">
+                  <span className="font-mono text-xs text-primary font-bold">[{b.index}]</span>
+                  <h3 className="text-base font-semibold text-ink">{b.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed">{b.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-16 text-center pt-8 border-t border-border">
+              <Link to="/on-analiz" className="btn-primary">
+                <span>İşletmeniz İçin Ön Analiz Başlatın</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Benefits / İş Modeli */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Sizi Güçlendiren Dijital İş Modeli</h2>
-          <p className="text-slate-400">
-            Era Dijital otomasyon altyapısına geçen işletmelerin elde ettiği kazanımlar.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="glass-card glass-card-hover p-8 rounded-3xl space-y-4">
-              <span className="text-primary font-bold text-sm tracking-wide block uppercase">
-                Fayda #{index + 1}
-              </span>
-              <h3 className="text-lg font-bold text-white">{benefit.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{benefit.desc}</p>
-            </div>
-          ))}
-          
-          {/* CTA Box inside Grid */}
-          <div className="glass-card p-8 rounded-3xl border border-primary/20 bg-primary/5 flex flex-col justify-between">
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-white">Hazır mısınız?</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                İşletmenizi yapay zekâ entegrasyonlarıyla geleceğe taşımak için bugün ilk adımı atın.
-              </p>
-            </div>
-            <Link
-              to="/on-analiz"
-              className="inline-flex items-center px-6 py-3.5 mt-6 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold shadow-lg hover:shadow-primary/30 group transition-all"
-            >
-              <span>Tanışma Toplantısı Ayarla</span>
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default HakkimizdaPage;
+}

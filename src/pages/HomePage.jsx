@@ -1,244 +1,302 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { ArrowRight, AlertCircle, MessageSquare, Clock, Zap, ShieldCheck, TrendingUp, BarChart2, MessageCircle, Calendar } from 'lucide-react';
+import { 
+  ArrowRight, 
+  ArrowUpRight,
+  CheckCircle2, 
+  Layers, 
+  Calendar, 
+  BarChart3, 
+  MessageSquareCode, 
+  Network,
+  Cpu,
+  Clock,
+  ShieldCheck
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import LiveAutomationFlow from '../components/LiveAutomationFlow';
 
-const HomePage = () => {
-  const painPoints = [
-    { text: "WhatsApp mesajları günlerce birikiyor" },
-    { text: "Instagram DM'leri zamanında yanıtlanamıyor" },
-    { text: "Aynı sorular tekrar tekrar yazılıyor ve vakit kaybettiriyor" },
-    { text: "Destek ekibi yoruluyor, müşteri beklemekten vazgeçiyor" },
+export default function HomePage() {
+  const capabilities = [
+    {
+      index: "01",
+      title: "WhatsApp & Instagram AI Asistanı",
+      tag: "OMNICHANNEL NLP",
+      desc: "Sosyal medya ve WhatsApp üzerinden gelen müşteri taleplerini şirketinizin bilgi tabanına göre 7/24 saniyeler içinde karşılayan akıllı konuşma motoru."
+    },
+    {
+      index: "02",
+      title: "Otomatik Randevu & Sipariş Akışları",
+      tag: "DIRECT BOOKING",
+      desc: "Müşterinin takvim müsaitliğini sorgulayan, randevuyu kilitleyen ve Google Calendar / CRM sisteminize anında işleyen pürüzsüz akışlar."
+    },
+    {
+      index: "03",
+      title: "CRM & Webhook Entegrasyon Köprüleri",
+      tag: "DATA PIPELINE",
+      desc: "HubSpot, Airtable, Paraşüt, Ticimax veya özel veritabanlarınızla çift yönlü veri senkronizasyonu. Manuel veri kopyalamayı sıfırlayın."
+    },
+    {
+      index: "04",
+      title: "Semantik Analiz & Günlük Özet Raporları",
+      tag: "EXECUTIVE INTEL",
+      desc: "Tüm müşteri konuşmalarından trendleri çıkaran, kayıp nedenlerini analiz eden ve yönetici paneline anlık iş zekâsı sunan raporlama."
+    }
   ];
 
-  const features = [
+  const onboardingSteps = [
     {
-      icon: <Calendar className="w-8 h-8 text-primary" />,
-      title: "Randevu & Sipariş Akışları",
-      desc: "Müşteri talepleri otomatik alınır, anında işlenir ve ilgili birimlere saniyeler içinde yönlendirilir."
+      step: "01 // KEŞİF",
+      title: "İş Akışı ve Tıkanıklık Analizi",
+      desc: "Ekibinizin en çok vakit kaybettiği tekrarlı soruları, formları ve manuel süreçleri haritalandırıyoruz."
     },
     {
-      icon: <BarChart2 className="w-8 h-8 text-secondary" />,
-      title: "Raporlama & Analiz",
-      desc: "Yapay zeka tüm müşteri konuşmalarını analiz eder, trendleri çıkarır ve size anlık iş raporu sunar."
+      step: "02 // MİMARİ",
+      title: "Bilgi Tabanı & Senaryo Tasarımı",
+      desc: "Şirketinize özel dokümanlar, ürün listeleri ve kurumsal yanıt tonuyla yapay zekâ modelini eğitiyoruz."
     },
     {
-      icon: <MessageCircle className="w-8 h-8 text-accent" />,
-      title: "AI Müşteri İletişimi",
-      desc: "WhatsApp ve Instagram üzerinden gelen mesajları akıllı promptlar ve bilgi tabanıyla 7/24 yönetir."
+      step: "03 // BAĞLANTI",
+      title: "API & Webhook Entegrasyonu",
+      desc: "WhatsApp Business API, CRM, takvim ve e-ticaret altyapınız arasında güvenli veri hatları kuruyoruz."
     },
     {
-      icon: <Zap className="w-8 h-8 text-primary" />,
-      title: "Uçtan Uca Entegrasyonlar",
-      desc: "Mevcut CRM, e-ticaret, muhasebe ve pazarlama sistemlerinizle tam entegre çalışır."
+      step: "04 // CANLI",
+      title: "SLA Güvencesiyle Devreye Alma",
+      desc: "Test aşamalarının ardından sistemi canlıya alıyor, 7/24 çalışma ve yanıt sürelerini izliyoruz."
     }
   ];
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-background text-ink selection:bg-primary selection:text-white">
       <SEO
         title="Yapay Zekâ Destekli Dijital Dönüşüm & Otomasyon | Era Dijital"
-        description="Era Dijital, işletmelerin manuel iş yükünü azaltan, müşteri iletişimini hızlandıran ve operasyonları otomatik yöneten yapay zeka otomasyon sistemleri kurar."
+        description="Era Dijital, işletmelerin manuel iş yükünü azaltan, WhatsApp ve web iletişimini hızlandıran ve operasyonları otomatik yöneten yapay zeka otomasyon sistemleri kurar."
       />
 
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-10 pb-20 overflow-hidden">
-        {/* Glow Effects */}
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/20 blur-[150px] rounded-full pointer-events-none -z-10 animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/15 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+      <main className="flex-1">
+        {/* HERO SECTION - Hallmark Asymmetric Workbench */}
+        <section className="py-12 lg:py-20 hairline-b relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+              {/* Hero Left Lede */}
+              <div className="lg:col-span-5 space-y-6">
+                <div className="inline-flex items-center gap-2">
+                  <span className="mono-tag mono-tag-active">
+                    <span className="w-1.5 h-1.5 rounded-full bg-signal-blue animate-pulse"></span>
+                    ERA OTOMASYON ALTYAPISI v2.4
+                  </span>
+                </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Hero Left */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
-            >
-              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-semibold tracking-wider uppercase">
-                <Zap className="w-4 h-4" />
-                <span>Yapay Zekâ Devrimi</span>
-              </div>
-              <h1 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
-                Yapay Zekâ Destekli <br />
-                <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                  Dijital Dönüşüm
-                </span>
-              </h1>
-              <p className="text-lg text-slate-300 leading-relaxed max-w-xl">
-                AI otomasyonlarıyla işlerinizi hızlandırın, sadeleştirin ve ölçeklendirin. Manuel iş yükünü azaltarak müşterilerinize 7/24 anında yanıt verin.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Link
-                  to="/on-analiz"
-                  className="w-full sm:w-auto px-8 py-4 text-center rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg shadow-primary/25 hover:shadow-primary/50 transition-all hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  Ücretsiz Ön Analiz Al
-                </Link>
-                <Link
-                  to="/hizmetler"
-                  className="w-full sm:w-auto px-8 py-4 text-center rounded-xl bg-white/5 border border-white/10 hover:border-white/20 text-white font-semibold transition-all hover:bg-white/10"
-                >
-                  Çözümlerimizi İncele
-                </Link>
-              </div>
-            </motion.div>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink leading-[1.15]">
+                  Manuel operasyonları <br />
+                  <span className="text-primary font-semibold">otonom sistemlere</span> dönüştürün.
+                </h1>
 
-            {/* Hero Right */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative flex justify-center lg:justify-end"
-            >
-              <div className="relative group max-w-md lg:max-w-full">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-30 blur-[40px] rounded-3xl group-hover:opacity-40 transition-opacity -z-10"></div>
-                <img
-                  src="/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp"
-                  alt="İstanbul Yapay Zekâ ve Otomasyon Sistemleri Çözümleri - Era Dijital"
-                  title="Yapay Zekâ ve Otomasyon Sistemleri İstanbul"
-                  className="rounded-3xl border border-white/10 shadow-2xl w-full object-cover aspect-[4/5] max-h-[500px]"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+                <p className="text-sm sm:text-base text-ink-muted leading-relaxed max-w-xl">
+                  Era Dijital; WhatsApp, Instagram ve web kanallarından gelen müşteri taleplerini yapay zekâ ile anında karşılayan, CRM ve muhasebe sistemlerinize otomatik işleyen kurumsal otomasyon mimarileri kurar.
+                </p>
 
-      {/* Pain Point Section */}
-      <section className="py-24 border-y border-white/5 relative bg-surface/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
-                Sorun Daha Fazla Müşteri Değil, Gelen Talepleri Yönetememek
-              </h2>
-              <p className="text-slate-400 mb-8 leading-relaxed">
-                Reklam yatırımları yapıp binlerce müşteri trafiği çekiyor olabilirsiniz. Ancak gelen mesajlara geç yanıt verdiğinizde potansiyel müşterilerinizi rakiplerinize kaptırırsınız. 
-              </p>
-              <div className="space-y-4">
-                {painPoints.map((item, index) => (
-                  <div key={index} className="flex items-start space-x-3.5">
-                    <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                    <span className="text-sm font-medium text-slate-300">{item.text}</span>
+                {/* Proof & Action Row */}
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <Link to="/on-analiz" className="btn-primary">
+                    <span>Ücretsiz Ön Analiz Al</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link to="/hizmetler" className="btn-secondary">
+                    <span>Modülleri İncele</span>
+                  </Link>
+                </div>
+
+                {/* Hallmark Operational Fact Row */}
+                <div className="pt-4 border-t border-border grid grid-cols-3 gap-4 font-mono text-xs text-ink-faint">
+                  <div>
+                    <span className="block text-ink font-semibold text-sm">&lt; 2 saniye</span>
+                    <span>Ortalama Yanıt</span>
                   </div>
-                ))}
+                  <div>
+                    <span className="block text-ink font-semibold text-sm">%100 Entegre</span>
+                    <span>CRM & Webhook</span>
+                  </div>
+                  <div>
+                    <span className="block text-ink font-semibold text-sm">7 / 24</span>
+                    <span>Kesintisiz Akış</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Hero Right: Live Interactive Visualizer */}
+              <div className="lg:col-span-7">
+                <LiveAutomationFlow />
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="glass-card p-8 sm:p-12 rounded-3xl border border-white/5 relative">
-              <div className="absolute top-0 right-0 p-4 bg-primary/10 text-primary rounded-bl-3xl border-l border-b border-white/5">
-                <Zap className="w-6 h-6 animate-pulse" />
+        {/* PROBLEM & ARCHITECTURE COMPARISON */}
+        <section className="py-20 hairline-b bg-surface/40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mb-12">
+              <span className="mono-tag mb-3">[OPERASYONEL TIKANIKLIK // ÇÖZÜM]</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                Sorun yetersiz müşteri değil; gelen taleplerin manuel kuyrukta kaybolması.
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Conventional Flaw Box */}
+              <div className="tech-panel p-6 border-red-500/20 bg-red-950/10 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-red-500/10">
+                  <span className="font-mono text-xs text-red-400 font-semibold">[KLASİK YÖNTEM // VERİMSİZLİK]</span>
+                  <span className="font-mono text-[11px] text-red-400/80">Yüksek Maliyet</span>
+                </div>
+                <ul className="space-y-3 text-xs sm:text-sm text-red-200/80">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-mono">✕</span>
+                    <span>WhatsApp ve Instagram DM'lerinde biriken mesajlar saatlerce, bazen günlerce yanıtsız kalır.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-mono">✕</span>
+                    <span>Aynı ürün, fiyat ve adres soruları manuel olarak kopyala-yapıştır yapılarak personelin saatlerini tüketir.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-mono">✕</span>
+                    <span>Mesaj atan potansiyel müşteri 5 dakika içinde yanıt alamadığında rakip firmaya geçer.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-mono">✕</span>
+                    <span>Mesajlaşmadaki veriler CRM'e işlenmediği için kimin satın aldığı veya neden vazgeçtiği izlenemez.</span>
+                  </li>
+                </ul>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4">Era Dijital Çözümü</h3>
-              <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                İşletmenize özel entegre ettiğimiz AI sistemleri, tüm sosyal medya ve iletişim kanallarından gelen mesajları tek merkezden saniyeler içinde yanıtlar. Müşteriyi bekletmez, satış kaçırmaz ve ekibinizin üzerinden %90'a varan iş yükünü alır.
+
+              {/* Engineered Fix Box */}
+              <div className="tech-panel p-6 border-primary/30 bg-[#0d1322] space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-border">
+                  <span className="font-mono text-xs text-primary font-semibold">[ERA OTOMASYON // MİMARİ]</span>
+                  <span className="font-mono text-[11px] text-signal-emerald">Otonom Akış</span>
+                </div>
+                <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-signal-emerald shrink-0 mt-0.5" />
+                    <span>Yapay zekâ asistanı gelen mesajı 1.2 saniyede şirket dokümanlarınıza göre hatasız yanıtlar.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-signal-emerald shrink-0 mt-0.5" />
+                    <span>Nitelikli müşteri adayı tespit edildiğinde anında telefon ve e-posta alınıp CRM'e aktarılır.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-signal-emerald shrink-0 mt-0.5" />
+                    <span>Müşteri temsilciniz sadece satışı kapatmak veya karmaşık soruları çözmek için devreye girer.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-signal-emerald shrink-0 mt-0.5" />
+                    <span>Haftalık konuşma analizleriyle müşterilerinizin en çok neyi merak ettiği raporlanır.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4 CAPABILITIES ARCHITECTURE */}
+        <section className="py-20 hairline-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+              <div>
+                <span className="mono-tag mb-3">[YAPILANDIRILABİLİR MODÜLLER]</span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                  Kurumsal Yapay Zekâ ve Veri Modülleri
+                </h2>
+              </div>
+              <Link to="/hizmetler" className="text-xs font-mono text-primary hover:underline flex items-center gap-1">
+                Tüm modül detaylarını gör →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {capabilities.map((c) => (
+                <div key={c.index} className="tech-panel-interactive p-5 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs text-primary font-semibold">[{c.index}]</span>
+                      <span className="font-mono text-[10px] text-ink-faint">{c.tag}</span>
+                    </div>
+                    <h3 className="text-base font-semibold text-ink leading-snug">
+                      {c.title}
+                    </h3>
+                    <p className="text-xs text-ink-muted leading-relaxed">
+                      {c.desc}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-border/70 flex items-center justify-between text-[11px] font-mono text-ink-faint">
+                    <span>SLA Dahil</span>
+                    <span className="text-signal-emerald">● Aktif</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4-STEP ONBOARDING PIPELINE */}
+        <section className="py-20 hairline-b bg-surface/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mb-12">
+              <span className="mono-tag mb-3">[UYGULAMA SÜRECİ]</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                3 ila 5 iş gününde canlıya alınan mimari.
+              </h2>
+              <p className="text-xs sm:text-sm text-ink-muted mt-2">
+                Aylarca süren karmaşık yazılım projeleri yerine, modüler ve test edilmiş şablonlarla hızla devreye alıyoruz.
               </p>
-              <Link
-                to="/on-analiz"
-                className="inline-flex items-center text-sm font-bold text-primary hover:text-secondary group transition-colors"
-              >
-                <span>Hemen Analiz Başlat</span>
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {onboardingSteps.map((s, idx) => (
+                <div key={idx} className="p-5 tech-panel space-y-3 relative">
+                  <span className="font-mono text-xs text-primary font-medium block">
+                    {s.step}
+                  </span>
+                  <h3 className="text-sm font-semibold text-ink">
+                    {s.title}
+                  </h3>
+                  <p className="text-xs text-ink-muted leading-relaxed">
+                    {s.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CALL TO ACTION - Hallmark Honest Bottom Unit */}
+        <section className="py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span className="mono-tag">[BAŞLANGIÇ ADIMI]</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-ink tracking-tight">
+              İşletmeniz için hangi otomasyonun en yüksek geri dönüşü sağlayacağını belirleyelim.
+            </h2>
+            <p className="text-sm sm:text-base text-ink-muted max-w-xl mx-auto leading-relaxed">
+              Mevcut mesajlaşma hacminizi ve iş akışınızı 15 dakikalık ücretsiz ön analiz görüşmesinde inceleyip size özel mimari planı hazırlıyoruz.
+            </p>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link to="/on-analiz" className="btn-primary px-6 py-3">
+                <span>Ücretsiz Ön Analiz Formunu Doldur</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link to="/fiyatlar" className="btn-secondary px-6 py-3">
+                <span>Paket Fiyatlarını Gör</span>
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Services Grid Section */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Neler Yapıyoruz?</h2>
-            <p className="text-slate-400">
-              Operasyonel süreçlerinizi yapay zeka ile otomatikleştirerek işletmenizi büyütüyoruz.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between">
-                <div className="space-y-6">
-                  <div className="p-3 bg-white/5 border border-white/10 rounded-2xl w-fit">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-white">{feature.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{feature.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Transformation Process Section */}
-      <section className="py-24 bg-surface/30 border-y border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Dijital Dönüşüm Sürecimiz</h2>
-            <p className="text-slate-400">
-              Süreçlerinizi baştan sona inceleyip adım adım AI altyapısına geçiriyoruz.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-            {/* Progress lines (desktop only) */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/30 to-secondary/30 -translate-y-12 -z-10"></div>
-
-            {[
-              { step: "01", title: "Süreç Analizi", desc: "İş akışlarınızı inceliyor, darboğazları ve AI ile çözülebilecek süreçleri ekiplerinizle belirliyoruz.", image: "/resimler/dijital-donusum-surecimiz/surec-analizi.webp", alt: "Era Dijital İş Akışı ve Süreç Analizi - İstanbul Bahçeşehir" },
-              { step: "02", title: "Akış Tasarımı", desc: "Müşteri yolculuklarını, cevap şablonlarını ve entegrasyon şemalarını projelendiriyoruz.", image: "/resimler/dijital-donusum-surecimiz/akis-tasarimi.webp", alt: "Müşteri Yolculuğu ve Yapay Zeka Akış Tasarımı - Türkiye" },
-              { step: "03", title: "AI Kurulumu", desc: "Prompt mühendisliği ve yazılım entegrasyonları ile sistemleri güvenle hayata geçiriyoruz.", image: "/resimler/dijital-donusum-surecimiz/ai-kurulumu.webp", alt: "Yapay Zeka Ajanı Kurulumu ve Prompt Mühendisliği - Era Dijital" },
-              { step: "04", title: "Optimizasyon", desc: "Çalışan sistemleri canlı verilerle izleyip sürekli eğitiyor, performanslarını optimize ediyoruz.", image: "/resimler/dijital-donusum-surecimiz/optimizasyon.webp", alt: "Yapay Zeka Performans Optimizasyonu ve Model Eğitimi" }
-            ].map((step, index) => (
-              <div key={index} className="glass-card p-6 rounded-3xl relative flex flex-col justify-between overflow-hidden group">
-                <div className="space-y-4">
-                  <span className="text-5xl font-black bg-gradient-to-br from-primary/40 to-secondary/10 bg-clip-text text-transparent block">
-                    {step.step}
-                  </span>
-                  <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{step.desc}</p>
-                </div>
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden mt-6 border border-white/5">
-                  <img src={step.image} alt={step.alt} title={step.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-30 blur-[100px] -z-10"></div>
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 space-y-8">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
-            İş Yükünü Azaltmak, Operasyonu AI ile Ölçeklemek İster misiniz?
-          </h2>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            Era Dijital, işletmenize özel 7/24 çalışan otomasyon sistemleri kurar. Bugün başlayan işletmeler yarından kazanır.
-          </p>
-          <div className="pt-4">
-            <Link
-              to="/on-analiz"
-              className="inline-flex items-center px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:-translate-y-0.5 active:translate-y-0 text-lg"
-            >
-              <span>Ücretsiz Ön Analiz Talep Et</span>
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default HomePage;
+}

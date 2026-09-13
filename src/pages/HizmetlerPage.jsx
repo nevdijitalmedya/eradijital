@@ -1,200 +1,178 @@
-import { motion } from 'framer-motion';
-import SEO from '../components/SEO';
+﻿import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
-import { Check, Cpu, MessageSquare, LineChart, Layers, HelpCircle, UserCheck } from 'lucide-react';
+import { 
+  Check, 
+  Cpu, 
+  MessageSquare, 
+  LineChart, 
+  Layers, 
+  ArrowRight, 
+  Network,
+  Workflow,
+  Sparkles,
+  ShieldCheck
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const HizmetlerPage = () => {
+export default function HizmetlerPage() {
+  const modules = [
+    {
+      code: "MODÜL 01",
+      tag: "STRATEJİ & MİMARİ",
+      title: "Dijital Dönüşüm Danışmanlığı",
+      desc: "Dijital dönüşüm sadece yeni bir yazılım satın almak değildir; iş süreçlerini baştan tasarlamaktır. İşletmenizin tüm iş akışlarını derinlemesine inceliyor, verimsiz darboğazları tespit ediyor ve dijital çağa uygun olarak yeniden modelliyoruz.",
+      features: [
+        "Mevcut iş akışlarının ve zaman kayıplarının haritalandırılması",
+        "Departmanlar arası iletişim kopukluklarının giderilmesi",
+        "Doğru yazılım, CRM ve bulut araçlarının seçimi ve entegrasyonu",
+        "Ekip içi kullanım eğitimleri ve adaptasyon takibi"
+      ],
+      img: "/resimler/hizmetler/dijital-donusum-danismanligi.webp",
+      alt: "Dijital Dönüşüm Danışmanlığı ve Süreç Mimarisi - Era Dijital"
+    },
+    {
+      code: "MODÜL 02",
+      tag: "OTONOM İLETİŞİM",
+      title: "Yapay Zekâ ve Otomasyon Sistemleri",
+      desc: "Tekrarlayan müşteri yazışmalarını ve veri girişlerini yapay zekâya devredin. Era Dijital; WhatsApp, Instagram ve web sitenizi şirketinizin bilgi tabanına bağlayarak müşterilerinize 7/24 anında, kişiselleştirilmiş yanıtlar sunar.",
+      features: [
+        "WhatsApp Business API ve Instagram DM akıllı yapay zekâ asistanı",
+        "Otomatik randevu, ön rezervasyon ve sipariş toplama kurguları",
+        "CRM (HubSpot, Airtable) ve e-ticaret sistemleriyle iki yönlü veri eşitleme",
+        "7/24 kesintisiz müşteri ön eleme ve lead skorlama"
+      ],
+      img: "/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp",
+      alt: "Yapay Zeka ve Otomasyon Sistemleri Çözümleri - Era Dijital"
+    },
+    {
+      code: "MODÜL 03",
+      tag: "VERİ ODAKLI BÜYÜME",
+      title: "Performans Odaklı Dijital Pazarlama",
+      desc: "Yapay zekâ otomasyonlarımızla doğrudan entegre çalışan reklam kampanyaları kurguluyoruz. Reklamdan gelen trafiğin saniyeler içinde AI tarafından karşılanması sayesinde bütçenizi boşa harcamıyor, dönüşüm oranlarını maksimize ediyoruz.",
+      features: [
+        "Meta (Instagram & Facebook), TikTok ve Google Ads optimizasyonu",
+        "Reklam tıklandığında anında WhatsApp'a yönlendiren AI karşılama akışları",
+        "Akıllı yeniden hedefleme (Retargeting) ve dinamik kitle segmentasyonu",
+        "Gerçek zamanlı ROAS ve dönüşüm performansı raporlaması"
+      ],
+      img: "/resimler/hizmetler/performans-odakli-dijital-pazarlama.webp",
+      alt: "Performans Odaklı Dijital Pazarlama ve Reklam Yönetimi - Era Dijital"
+    }
+  ];
+
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-background text-ink selection:bg-primary selection:text-white">
       <SEO
-        title="Hizmetlerimiz | Era Dijital"
-        description="AI Otomasyon Sistemleri, Dijital Dönüşüm Danışmanlığı ve Performans Odaklı Dijital Pazarlama hizmetlerimizin detayları."
+        title="Hizmetlerimiz & Modüller | Era Dijital"
+        description="Yapay Zekâ Otomasyon Sistemleri, Dijital Dönüşüm Danışmanlığı ve Performans Odaklı Dijital Pazarlama modüllerimizle işletmenizi ölçeklendirin."
       />
 
       <Header />
 
-      {/* Services Hero */}
-      <section className="relative py-24 border-b border-white/5 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-secondary/5 blur-[180px] rounded-full pointer-events-none -z-10 -translate-x-1/2 -translate-y-1/2 animate-pulse-slow"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-xs font-semibold tracking-wider uppercase"
-          >
-            <Cpu className="w-4 h-4" />
-            <span>Hizmet Kapsamı</span>
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-extrabold text-white"
-          >
-            AI Otomasyon & Dönüşüm Çözümleri
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed"
-          >
-            Tekrarlayan işleri yapay zekâya bırakın. Era Dijital, operasyon yükünüzü hafifleten akıllı senaryolar ve entegre sistemler kurar.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Service 1: Dijital Dönüşüm Danışmanlığı */}
-      <section className="py-24 border-b border-white/5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-semibold">
-              <span>Modül 01</span>
+      <main className="flex-1">
+        {/* Page Header */}
+        <section className="py-16 sm:py-20 hairline-b bg-surface/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl space-y-4">
+              <span className="mono-tag">[HİZMET MİMARİSİ // 3 TEMEL DİREK]</span>
+              <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-ink">
+                Yapay Zekâ Otomasyonu & Dönüşüm Çözümleri
+              </h1>
+              <p className="text-sm sm:text-base text-ink-muted leading-relaxed">
+                Tekrarlayan işleri ve müşteri mesaj kuyruklarını otonom sistemlere devredin. Operasyon yükünüzü hafifleten, CRM'inize bağlanan ve ölçülebilir sonuç üreten modüler altyapı.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              Dijital Dönüşüm Danışmanlığı
-            </h2>
-            <p className="text-slate-400 leading-relaxed">
-              Dijital dönüşüm; sadece yeni bir yazılım kurmak değil, süreçleri yeniden tasarlamaktır. İşletmenizin tüm iş akışlarını derinlemesine inceliyor, verimsiz noktaları tespit ediyor ve dijital çağa uygun olarak yeniden tasarlıyoruz.
-            </p>
-            
-            <div className="space-y-4">
-              <h4 className="text-white font-bold text-sm">Sunulan Çözümler:</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300 text-sm">
-                {["Manuel süreç analizi", "Operasyonel tasarım", "Dijital iş akışları kurulumu", "Talep & kayıt takip sistemleri", "Müşteri yolculuğu optimizasyonu", "KVKK uyumlu güvenli altyapı"].map((item, i) => (
-                  <div key={i} className="flex items-center space-x-2.5">
-                    <Check className="w-4 h-4 text-primary shrink-0" />
-                    <span>{item}</span>
+          </div>
+        </section>
+
+        {/* Services Detail List */}
+        <section className="py-16 space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            {modules.map((m, idx) => (
+              <div 
+                key={m.code}
+                className="tech-panel p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
+              >
+                {/* Text Specs Column */}
+                <div className={`lg:col-span-7 space-y-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="flex items-center gap-2">
+                    <span className="mono-tag font-semibold text-primary">{m.code}</span>
+                    <span className="font-mono text-xs text-ink-faint">{m.tag}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
 
-          <div className="relative flex justify-center">
-            <div className="absolute inset-0 bg-primary/10 blur-[40px] rounded-3xl -z-10"></div>
-            <img 
-              src="/resimler/hizmetler/dijital-donusum-danismanligi-analiz.webp" 
-              alt="İstanbul Bahçeşehir Dijital Dönüşüm ve Süreç Analizi Danışmanlığı - Era Dijital" 
-              title="Dijital Dönüşüm Danışmanlığı İstanbul"
-              className="rounded-3xl border border-white/10 shadow-2xl max-h-[450px] w-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-ink tracking-tight">
+                    {m.title}
+                  </h2>
 
-      {/* Service 2: AI Otomasyon Sistemleri */}
-      <section className="py-24 border-b border-white/5 bg-surface/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1 relative flex justify-center">
-            <div className="absolute inset-0 bg-secondary/10 blur-[40px] rounded-3xl -z-10"></div>
-            <img 
-              src="/resimler/hizmetler/ai-otomasyon-sistemleri-chat.webp" 
-              alt="Yapay Zekâ ve WhatsApp Ajanı Entegrasyonu İstanbul - Era Dijital AI Otomasyon" 
-              title="Yapay Zekâ Otomasyon Sistemleri"
-              className="rounded-3xl border border-white/10 shadow-2xl max-h-[450px] w-full object-cover"
-            />
-          </div>
+                  <p className="text-sm text-ink-muted leading-relaxed">
+                    {m.desc}
+                  </p>
 
-          <div className="order-1 lg:order-2 space-y-8">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-secondary/20 bg-secondary/5 text-secondary text-xs font-semibold">
-              <span>Modül 02</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              AI Otomasyon Sistemleri (WhatsApp & Instagram)
-            </h2>
-            <p className="text-slate-400 leading-relaxed">
-              Tekrarlanan müşteri mesajlarını yönetmek için hazır botlar değil, işletme veri tabanınız ve kurallarınızla beslenen akıllı yapay zeka ajanları kuruyoruz. 7/24 kesintisiz, insan gibi sohbet edebilen akışlar tasarlıyoruz.
-            </p>
-
-            <div className="space-y-4">
-              <h4 className="text-white font-bold text-sm">Otomatikleştirdiğimiz Süreçler:</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300 text-sm">
-                {["Instagram DM & WhatsApp yanıtları", "Sık sorulan sorular (SSS)", "Randevu & sipariş alma akışları", "Teklif talebi toplama", "CRM'e otomatik müşteri kaydı", "Satış sonrası takip & anket"].map((item, i) => (
-                  <div key={i} className="flex items-center space-x-2.5">
-                    <Check className="w-4 h-4 text-secondary shrink-0" />
-                    <span>{item}</span>
+                  <div className="pt-2 border-t border-border/80">
+                    <span className="font-mono text-xs text-ink-faint uppercase block mb-3">
+                      [KAPSAM DAHİLİNDEKİ MİMARİ ADIMLAR]
+                    </span>
+                    <ul className="space-y-2.5 text-xs sm:text-sm text-slate-200">
+                      {m.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-start gap-2.5">
+                          <Check className="w-4 h-4 text-signal-emerald shrink-0 mt-0.5" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Service 3: Dijital Pazarlama Hizmetleri */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5 text-accent text-xs font-semibold">
-              <span>Modül 03</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-              Performans Odaklı Dijital Pazarlama
+                  <div className="pt-2">
+                    <Link to="/on-analiz" className="btn-primary text-xs">
+                      <span>Bu Modül İçin Ön Analiz İste</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Figure Column */}
+                <div className={`lg:col-span-5 flex justify-center ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <figure className="tech-panel p-2 bg-[#0d121c] border border-border/80 max-w-md w-full">
+                    <img 
+                      src={m.img} 
+                      alt={m.alt}
+                      className="w-full h-auto object-contain rounded max-h-[380px]"
+                    />
+                    <figcaption className="mt-2 text-[11px] font-mono text-center text-ink-faint">
+                      {m.code} // Altyapı Şeması
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA Bottom Banner */}
+        <section className="py-20 hairline-t bg-surface/20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            <span className="mono-tag">[SONRAKİ ADIM]</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+              İşletmenize en uygun modülü birlikte seçelim.
             </h2>
-            <p className="text-slate-400 leading-relaxed">
-              Yapay zeka otomasyon sistemlerimizle doğrudan entegre çalışan reklam kampanyaları kurguluyoruz. Reklamdan gelen trafiğin saniyeler içinde AI tarafından karşılanması sayesinde bütçenizi boşa harcamıyor, satışlarınızı artırıyoruz.
+            <p className="text-sm text-ink-muted max-w-xl mx-auto">
+              Hangi süreçlerinizi otomatik hale getirebileceğinizi öğrenmek için 15 dakikalık ücretsiz bir ön analiz görüşmesi ayarlayabilirsiniz.
             </p>
-
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="p-3 bg-white/5 border border-white/10 rounded-xl h-fit">
-                  <LineChart className="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-sm mb-1">Sosyal Medya Reklam Yönetimi</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">Meta (Facebook/Instagram), TikTok ve Google Ads üzerinde işletmenize özel performans odaklı reklam kurguları.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="p-3 bg-white/5 border border-white/10 rounded-xl h-fit">
-                  <Layers className="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-sm mb-1">Yeniden Hedefleme (Retargeting)</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">Sitenizi veya sosyal medya hesaplarınızı ziyaret etmiş ancak alışveriş yapmamış kitleleri akıllı reklamlarla yakalama.</p>
-                </div>
-              </div>
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link to="/on-analiz" className="btn-primary">
+                <span>Ücretsiz Ön Analiz Talep Edin</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link to="/fiyatlar" className="btn-secondary">
+                <span>Paket ve Fiyatları İncele</span>
+              </Link>
             </div>
           </div>
-
-          <div className="relative flex justify-center">
-            <div className="absolute inset-0 bg-accent/10 blur-[40px] rounded-3xl -z-10"></div>
-            <img 
-              src="/resimler/hizmetler/performans-odakli-dijital-pazarlama.webp" 
-              alt="Sosyal Medya ve Google Performans Reklam Yönetimi Türkiye - Era Dijital Pazarlama" 
-              title="Performans Odaklı Dijital Pazarlama"
-              className="max-h-[450px] w-auto object-contain animate-float"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Services Call to Action */}
-      <section className="py-24 relative overflow-hidden border-t border-white/5">
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-primary/10 blur-[150px] rounded-full pointer-events-none -z-10 -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">İşletmenize En Uygun Çözümü Birlikte Seçelim</h2>
-          <p className="text-slate-300 leading-relaxed">
-            Hangi süreçlerinizi otomatik hale getirebileceğinizi öğrenmek için ücretsiz bir ön analiz görüşmesi ayarlayabilirsiniz.
-          </p>
-          <div className="pt-4">
-            <Link
-              to="/on-analiz"
-              className="px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 transition-all inline-block"
-            >
-              Ücretsiz Ön Analiz Talep Edin
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
-
-export default HizmetlerPage;
+}
